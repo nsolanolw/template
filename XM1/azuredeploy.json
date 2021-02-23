@@ -8,7 +8,10 @@
     "deploymentUniqueID":{
       "type": "string"
     },
-
+    "deploymentId": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().name]"
+    },
     "templateLinkBase": {
       "type": "string",
       "defaultValue": "[uri(replace(json(string(deployment().properties.templateLink)).uri,' ','%20'), '.')]"
