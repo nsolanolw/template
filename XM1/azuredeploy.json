@@ -11,7 +11,7 @@
 
     "templateLinkBase": {
       "type": "string",
-      "defaultValue": ""
+      "defaultValue": "[uri(replace(json(string(deployment().properties.templateLink)).uri,' ','%20'), '.')]"
     },
     "templateLinkAccessToken": {
       "type": "string",
