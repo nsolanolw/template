@@ -1,0 +1,54 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "deploymentUniqueID": {
+      "value": "2102181017"
+    },
+    "solrConnectionString": {
+      "value": "http://52.157.208.32:8983/solr/"
+    },
+    "rootDeployPackageUrl": {
+      "value": "https://sitecore10files.blob.core.windows.net/sitecore/"
+    },
+    "jssCDMsDeployPackageUrl": {
+      "value": "https://sitecore10files.blob.core.windows.net/sitecore/Sitecore%20JavaScript%20Services%20Server%20for%20Sitecore%2010.0.0%20XM%2015.0.1%20rev.%20201112%20CD.scwdp.zip?sp=r&st=2021-02-18T14:23:45Z&se=2051-02-18T22:23:45Z&spr=https&sv=2020-02-10&sr=b&sig=DdCNLNE1O2H8bDVAY5VUKLnG6U7cCNwy5ggzjj2tVwk%3D"
+    },
+    "jssMsDeployPackageUrl": {
+      "value": "https://sitecore10files.blob.core.windows.net/sitecore/Sitecore%20JavaScript%20Services%20Server%20for%20Sitecore%2010.0.0%20XM%2015.0.1%20rev.%20201112.scwdp.zip?sp=r&st=2021-02-18T14:20:48Z&se=2051-02-18T22:20:48Z&spr=https&sv=2020-02-10&sr=b&sig=cJ1st8uqKwS%2BxK5g9dP0m4GC9l7kpoG0CviDpau1C98%3D"
+    },
+    "sqlServerLogin": {
+      "value": "scpoc"
+    },
+    "sqlServerPassword": {
+      "value": "ROFFlpLIRglntgRsV8UF"
+    },
+    "siMsDeployPackageUrl": {
+      "value": "https://sitecore10files.blob.core.windows.net/sitecore/Sitecore.IdentityServer.5.0.0-r00277.scwdp.zip?sp=r&st=2021-02-17T15:03:08Z&se=2051-02-17T23:03:08Z&spr=https&sv=2020-02-10&sr=b&sig=IxmIKw4TnZa5Y3rcqQiwRHAGPRaL2%2FG5OM3IMOp%2FMe4%3D"
+    },
+    "cmMsDeployPackageUrl": {
+      "value": "https://sitecore10files.blob.core.windows.net/sitecore/Sitecore%2010.0.1%20rev.%20004842%20(XM)%20(Cloud)_cm.scwdp.zip?sp=r&st=2021-02-17T15:02:46Z&se=2051-02-17T23:02:46Z&spr=https&sv=2020-02-10&sr=b&sig=sT9%2BJAbzRMqYV8AD0U1XIwLyPp3HdwaLNtBvwWPWVQI%3D"
+    },
+    "cdMsDeployPackageUrl": {
+      "value": "https://sitecore10files.blob.core.windows.net/sitecore/Sitecore%2010.0.1%20rev.%20004842%20(XM)%20(Cloud)_cd.scwdp.zip?sp=r&st=2021-02-17T15:01:12Z&se=2051-02-17T23:01:12Z&spr=https&sv=2020-02-10&sr=b&sig=4BiZlfKK%2BwwTxytZC8Bir5CgpMNuDXnPmHpkPYNvbGE%3D"
+    },
+    "sitecoreAdminPassword": {
+      "value": "ROFFlpLIRglntgRsV8UF"
+    },
+    "licenseXml": {
+      "value": ""
+    },
+    "authCertificateBlob":{
+      "value": "[System.Convert]::ToBase64String([System.IO.File]::ReadAllBytes($CertificateFile)"
+    },
+    "authCertificatePassword":{
+      "value": "sitecore"
+    },
+    "siWebAppName":{
+      "value": "sc-poc-si"
+    },
+    "cmWebAppName":{
+      "value": "sc-poc-cm-01"
+    }
+  }
+}
