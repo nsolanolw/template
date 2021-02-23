@@ -1,0 +1,41 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "type": "String"
+        },
+        "cdWebApps": {
+            "type": "Array"
+        },
+        "rootDeployPackageUrl": {
+            "type": "String"
+        }
+    },
+    "variables": {
+        "webApiVersion": "2016-08-01"
+    },
+    "resources": [
+        {
+            "copy": {
+                "name": "machineKeyCopy",
+                "count": "[length(parameters('cdWebApps'))]"
+            },
+            "type": "Microsoft.Web/sites/extensions",
+            "apiVersion": "[variables('webApiVersion')]",
+            "name": "[concat(parameters('cdWebApps')[copyIndex()].name, '/', 'MSDeploy')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "addOnPackages": [
+                    {
+                        "packageUri": "[concat(parameters('rootDeployPackageUrl'),'CD-Multiple.scwdp.zip')]",
+                        "dbType": "None",
+                        "setParameters": {
+                            "Solr Web Core Name": "[concat('sitecore_web', copyIndex(1), '_index')]"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

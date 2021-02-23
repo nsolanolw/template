@@ -1,0 +1,266 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "variables": {
+    "dbApiVersion": "2014-04-01-preview",
+    "webApiVersion": "2018-02-01",
+    "searchApiVersion": "2015-08-19",
+    "searchRestApiVersion": "2017-11-11",
+    "redisApiVersion": "2016-04-01",
+    "applicationInsightsApiVersion": "2015-05-01",
+    "sqlServerFqdnTidy": "[trim(toLower(parameters('sqlServerFqdn')))]",
+    "securitySqlDatabaseNameTidy": "[toLower(trim(parameters('securitySqlDatabaseName')))]",
+    "webSqlDatabaseNameTidy": "[toLower(trim(parameters('webSqlDatabaseName')))]",
+    "formsSqlDatabaseNameTidy": "[toLower(trim(parameters('formsSqlDatabaseName')))]",
+    "redisCacheNameTidy": "[toLower(trim(parameters('redisCacheName')))]",
+    "applicationInsightsNameTidy": "[toLower(trim(parameters('applicationInsightsName')))]",
+    "searchServiceNameTidy": "[toLower(trim(parameters('searchServiceName')))]",
+    "searchProvider": "[if(empty(parameters('solrConnectionString')), 'Azure', 'Solr')]",
+    "defaultWebDatabaseId": "[concat('/subscriptions/',subscription().subscriptionId,'/resourceGroups/',parameters('prefix'),'/providers/Microsoft.Sql/Servers/',parameters('sqlServerNameTidy'),'/databases/',variables('webSqlDatabaseNameTidy'))]"
+  },
+  "parameters": {
+    "infrastructure": {
+      "type": "secureObject",
+      "defaultValue": {
+        "authCertificateThumbprint": null,
+        "siWebAppHostName": null,
+        "cmWebAppHostName": null,
+        "sqlServerFqdn": null,
+        "sqlServerNameTidy": null,
+        "hostingPlans": null,
+        "webApps": null,
+        "cdWebApps": null
+      }
+    },
+    "prefix": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().name]"
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]"
+    },
+    "sitecoreAdminPassword": {
+      "type": "securestring",
+      "minLength": 8
+    },
+    "licenseXml": {
+      "type": "securestring",
+      "minLength": 1
+    },
+    "sqlServerFqdn": {
+      "type": "string",
+      "defaultValue": "[parameters('infrastructure').sqlServerFqdn]"
+    },
+    "sqlServerNameTidy": {
+      "type": "string",
+      "defaultValue": "[parameters('infrastructure').sqlServerNameTidy]"
+    },
+    "sqlServerLogin": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sqlServerPassword": {
+      "type": "securestring",
+      "minLength": 8
+    },
+    "securitySqlDatabaseName": {
+      "type": "string",
+      "defaultValue": "[concat(parameters('prefix'), '-core-db')]"
+    },
+    "webSqlDatabaseName": {
+      "type": "string",
+      "defaultValue": "[concat(parameters('prefix'), '-web-db')]"
+    },
+    "formsSqlDatabaseName": {
+      "type": "string",
+      "defaultValue": "[concat(parameters('prefix'), '-forms-db')]"
+    },
+    "securitySqlDatabaseUserName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "securityuser"
+    },
+    "securitySqlDatabasePassword": {
+      "type": "securestring",
+      "minLength": 8,
+      "defaultValue": "[concat(toUpper(uniqueString('security', parameters('passwordSalt'))), uniqueString('security', parameters('sqlServerPassword'), parameters('passwordSalt')), toUpper(uniqueString('security', parameters('sitecoreAdminPassword'), parameters('passwordSalt'))), '4@')]"
+    },
+    "webSqlDatabaseUserName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "webuser"
+    },
+    "webSqlDatabasePassword": {
+      "type": "securestring",
+      "minLength": 8,
+      "defaultValue": "[concat(toUpper(uniqueString('web', parameters('passwordSalt'))), uniqueString('web', parameters('sqlServerPassword'), parameters('passwordSalt')), toUpper(uniqueString('web', parameters('sitecoreAdminPassword'), parameters('passwordSalt'))), '4@')]"
+    },
+    "formsSqlDatabaseUserName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "formsuser"
+    },
+    "formsSqlDatabasePassword": {
+      "type": "securestring",
+      "minLength": 8,
+      "defaultValue": "[concat(toUpper(uniqueString('forms', parameters('passwordSalt'))), uniqueString('forms', parameters('sqlServerPassword'), parameters('passwordSalt')), toUpper(uniqueString('forms', parameters('sitecoreAdminPassword'), parameters('passwordSalt'))), '4@')]"
+    },
+    "searchServiceName": {
+      "type": "string",
+      "defaultValue": "[concat(parameters('prefix'), '-as')]"
+    },
+    "solrConnectionString": {
+      "type": "securestring",
+      "defaultValue": ""
+    },
+    "redisCacheName": {
+      "type": "string",
+      "defaultValue": "[concat(parameters('prefix'), '-redis')]"
+    },
+    "useApplicationInsights": {
+      "type": "bool",
+      "defaultValue": true
+    },
+    "applicationInsightsName": {
+      "type": "string",
+      "defaultValue": "[concat(parameters('prefix'), '-ai')]"
+    },
+    "storeSitecoreCountersInApplicationInsights": {
+      "type": "bool",
+      "defaultValue": false
+    },
+    "cdMsDeployPackageUrl": {
+      "type": "securestring",
+      "minLength": 1
+    },
+    "passwordSalt": {
+      "type": "securestring",
+      "minLength": 1,
+      "defaultValue": "[resourceGroup().id]"
+    },
+    "cdNodeJsVersion": {
+      "type": "string",
+      "defaultValue": "8.11.1"
+    },
+    "environmentType": {
+      "type": "string",
+      "defaultValue": "Non-Production"
+    },
+    "webApps": {
+      "type": "Array",
+      "defaultValue": "[parameters('infrastructure').webApps]"
+    },
+    "cdWebApps": {
+      "type": "Array",
+      "defaultValue": "[parameters('infrastructure').cdWebApps]"
+    },
+    "rootDeployPackageUrl":{
+      "type": "String"
+    },
+    "sessionProvider":{
+      "type": "String",
+      "defaultValue": "mssql",
+      "allowedValues": [
+        "mongo",
+        "mssql",
+        "redis"
+      ]
+    }
+
+  },
+  "functions": [
+    {
+      "namespace": "utils",
+      "members": {
+        "dbSuffix": {
+          "parameters": [
+            {
+              "name": "cdWebApps",
+              "type": "array"
+            },
+            {
+              "name": "index",
+              "type": "int"
+            }
+          ],
+          "output": {
+            "type": "string",
+            "value": "[if(equals(length(parameters('cdWebApps')),1),'',concat('-',parameters('index')))]"
+          }
+        }
+      }
+    }
+  ],
+  "resources": [
+    {
+      "copy": {
+        "name": "cdMSDeployCopy",
+        "count": "[length(parameters('cdWebApps'))]"
+      },
+      "name": "[concat(parameters('cdWebApps')[copyIndex()].name, '/', 'MSDeploy')]",
+      "type": "Microsoft.Web/sites/extensions",
+      "location": "[parameters('location')]",
+      "apiVersion": "[variables('webApiVersion')]",
+      "properties": {
+        "mode": "Incremental",
+        "addOnPackages": [
+          {
+            "packageUri": "[parameters('cdMsDeployPackageUrl')]",
+            "dbType": "SQL",
+            "connectionString": "[concat('Data Source=tcp:', variables('sqlServerFqdnTidy'), ',1433;Initial Catalog=master;User Id=', parameters('sqlServerLogin'), ';Password=', parameters('sqlServerPassword'), ';')]",
+            "setParameters": {
+              "Application Path": "[parameters('cdWebApps')[copyIndex()].name]",
+              "Security Connection String": "[concat('Encrypt=True;TrustServerCertificate=False;Data Source=', variables('sqlServerFqdnTidy'), ',1433;Initial Catalog=',variables('securitySqlDatabaseNameTidy'),';User Id=', parameters('sqlServerLogin'), ';Password=', parameters('sqlServerPassword'), ';')]",
+              "Web Connection String": "[concat('Encrypt=True;TrustServerCertificate=False;Data Source=', variables('sqlServerFqdnTidy'), ',1433;Initial Catalog=',variables('webSqlDatabaseNameTidy'), utils.dbSuffix(parameters('cdWebApps'),copyIndex(1)) ,';User Id=', parameters('sqlServerLogin'), ';Password=', parameters('sqlServerPassword'), ';')]",
+              "Experience Forms Connection String": "[concat('Encrypt=True;TrustServerCertificate=False;Data Source=', variables('sqlServerFqdnTidy'), ',1433;Initial Catalog=',variables('formsSqlDatabaseNameTidy'),';User Id=', parameters('sqlServerLogin'), ';Password=', parameters('sqlServerPassword'), ';')]",
+              "Redis Sessions": "[if(equals(parameters('sessionProvider'),'redis'),concat(reference(resourceId('Microsoft.Cache/Redis', variables('redisCacheNameTidy')), variables('redisApiVersion')).hostName, ':', reference(resourceId('Microsoft.Cache/Redis', variables('redisCacheNameTidy')), variables('redisApiVersion')).sslPort, ',password=', listKeys(resourceId('Microsoft.Cache/Redis', variables('redisCacheNameTidy')), variables('redisApiVersion')).primaryKey, ',ssl=True,abortConnect=False'),'xxx')]",
+              "Search Provider": "[variables('searchProvider')]",
+              "Cloud Search Connection String": "[if(equals(variables('searchProvider'), 'Azure'), concat('serviceUrl=https://', variables('searchServiceNameTidy'), '.search.windows.net;apiVersion=', variables('searchRestApiVersion'), ';apiKey=', listAdminKeys(resourceId('Microsoft.Search/searchServices', variables('searchServiceNameTidy')), variables('searchApiVersion')).primaryKey), '')]",
+              "SOLR Connection String": "[parameters('solrConnectionString')]",
+              "Application Insights Instrumentation Key": "[if(parameters('useApplicationInsights'), reference(resourceId('Microsoft.Insights/Components', variables('applicationInsightsNameTidy')), variables('applicationInsightsApiVersion')).InstrumentationKey, '')]",
+              "Application Insights Role": "[if(parameters('useApplicationInsights'), 'CD', '')]",
+              "Store Sitecore Counters In Application Insights": "[if(parameters('useApplicationInsights'), string(parameters('storeSitecoreCountersInApplicationInsights')), 'false')]",
+              "Use Application Insights": "[string(parameters('useApplicationInsights'))]",
+              "License Xml": "[parameters('licenseXml')]"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "copy": {
+        "name": "cdAppSettingsCopy",
+        "count": "[length(parameters('cdWebApps'))]"
+      },
+      "name": "[concat(parameters('cdWebApps')[copyIndex()].name, '/', 'Appsettings')]",
+      "type": "Microsoft.Web/sites/config",
+      "apiVersion": "[variables('webApiVersion')]",
+      "properties": {
+        "WEBSITE_DYNAMIC_CACHE": 0,
+        "WEBSITE_NODE_DEFAULT_VERSION": "[parameters('cdNodeJsVersion')]",
+        "SITECORE_ENVIRONMENT_TYPE": "[parameters('environmentType')]"
+      },
+      "dependsOn": [
+        "cdMSDeployCopy"
+      ]
+    },
+
+    {
+      "copy": {
+        "name": "webDatabaseCopy",
+        "count": "[length(parameters('cdWebApps'))]"
+      },
+      "condition": "[greater(length(parameters('cdWebApps')),1)]",
+      "name": "[concat(parameters('sqlServerNameTidy'), '/', variables('webSqlDatabaseNameTidy') , utils.dbSuffix(parameters('cdWebApps'),copyIndex(1)))]",
+      "type": "Microsoft.Sql/servers/databases",
+      "location": "[parameters('location')]",
+      "apiVersion": "[variables('dbApiVersion')]",
+      "properties": {
+        "createMode": "Copy",
+        "sourceDatabaseId": "[variables('defaultWebDatabaseId')]"
+      }
+    }
+
+  ]
+}
