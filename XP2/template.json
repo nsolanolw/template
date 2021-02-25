@@ -949,10 +949,10 @@
                         "value": "[parameters('refDataSqlDatabaseName')]"
                     },
                     "xcBasicHostingPlanName": {
-                        "value": "[parameters('siHostingPlanName')]"
+                        "value": "[parameters('xcBasicHostingPlanName')]"
                     },
                     "xcResourceIntensiveHostingPlanName": {
-                        "value": "[parameters('siHostingPlanName')]"
+                        "value": "[parameters('xcResourceIntensiveHostingPlanName')]"
                     },
                     "xcRefDataWebAppName": {
                         "value": "[parameters('xcRefDataWebAppName')]"
