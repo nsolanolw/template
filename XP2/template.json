@@ -827,10 +827,10 @@
                         "value": "[parameters('cdHostingPlanName')]"
                     },
                     "prcHostingPlanName": {
-                        "value": "[parameters('siHostingPlanName')]"
+                        "value": "[parameters('prcHostingPlanName')]"
                     },
                     "repHostingPlanName": {
-                        "value": "[parameters('siHostingPlanName')]"
+                        "value": "[parameters('repHostingPlanName')]"
                     },
                     "siWebAppName": {
                         "value": "[parameters('siWebAppName')]"
@@ -996,7 +996,7 @@
                         "value": "[parameters('sitecoreSKU')]"
                     },
                     "exmDdsHostingPlanName": {
-                        "value": "[parameters('siHostingPlanName')]"
+                        "value": "[parameters('exmDdsHostingPlanName')]"
                     },
                     "exmDdsWebAppName": {
                         "value": "[parameters('exmDdsWebAppName')]"
