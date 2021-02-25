@@ -14,8 +14,8 @@
     "refDataSqlDatabaseNameTidy": "[toLower(trim(parameters('refDataSqlDatabaseName')))]",
     "refDataSqlDatabaseCollation": "Latin1_General_CS_AS",
 
-    "siHostingPlanNameTidy": "[toLower(trim(parameters('siHostingPlanName')))]",
-    "siHostingPlanNameTidy": "[toLower(trim(parameters('siHostingPlanName')))]",
+    "xcBasicHostingPlanNameTidy": "[toLower(trim(parameters('xcBasicHostingPlanName')))]",
+    "xcResourceIntensiveHostingPlanNameTidy": "[toLower(trim(parameters('xcResourceIntensiveHostingPlanName')))]",
 
     "xcRefDataWebAppNameTidy": "[toLower(trim(parameters('xcRefDataWebAppName')))]",
     "xcCollectWebAppNameTidy": "[toLower(trim(parameters('xcCollectWebAppName')))]",
@@ -37,19 +37,19 @@
     "aseResourceId": "[resourceId(parameters('aseResourceGroupName'), 'Microsoft.Web/hostingEnvironments', parameters('aseName'))]",
     "hostingPlanProperties": {
       "xcBasicProperties": {
-        "name": "[variables('siHostingPlanNameTidy')]"
+        "name": "[variables('xcBasicHostingPlanNameTidy')]"
       },
       "xcBasicPropertiesWithASE": {
-        "name": "[variables('siHostingPlanNameTidy')]",
+        "name": "[variables('xcBasicHostingPlanNameTidy')]",
         "hostingEnvironmentProfile": {
           "id": "[variables('aseResourceId')]"
         }
       },
       "xcResourceIntensiveProperties": {
-        "name": "[variables('siHostingPlanNameTidy')]"
+        "name": "[variables('xcResourceIntensiveHostingPlanNameTidy')]"
       },
       "xcResourceIntensivePropertiesWithASE": {
-        "name": "[variables('siHostingPlanNameTidy')]",
+        "name": "[variables('xcResourceIntensiveHostingPlanNameTidy')]",
         "hostingEnvironmentProfile": {
           "id": "[variables('aseResourceId')]"
         }
@@ -108,12 +108,16 @@
       "defaultValue": "[concat(parameters('deploymentId'), '-refdata-db')]"
     },
 
-    "siHostingPlanName": {
+    "xcBasicHostingPlanName": {
       "type": "string",
       "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-si-hp')]"
+      "defaultValue": "[concat(parameters('deploymentId'), '-xc-basic-hp')]"
     },
-
+    "xcResourceIntensiveHostingPlanName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('deploymentId'), '-xc-resourceintensive-hp')]"
+    },
 
     "xcRefDataWebAppName": {
       "type": "string",
@@ -418,7 +422,7 @@
   "resources": [
     {
       "type": "Microsoft.Web/serverfarms",
-      "name": "[variables('siHostingPlanNameTidy')]",
+      "name": "[variables('xcBasicHostingPlanNameTidy')]",
       "apiVersion": "[variables('serverFarmApiVersion')]",
       "sku": {
         "name": "[if(not(variables('useAse')), parameters('resourceSizes').xcBasicHostingPlan.SkuName, parameters('resourceSizes').xcBasicHostingPlanIsolated.SkuName)]",
@@ -433,7 +437,7 @@
     },
     {
       "type": "Microsoft.Web/serverfarms",
-      "name": "[variables('siHostingPlanNameTidy')]",
+      "name": "[variables('xcResourceIntensiveHostingPlanNameTidy')]",
       "apiVersion": "[variables('serverFarmApiVersion')]",
       "sku": {
         "name": "[if(not(variables('useAse')), parameters('resourceSizes').xcResourceIntensiveHostingPlan.SkuName, parameters('resourceSizes').xcResourceIntensiveHostingPlanIsolated.SkuName)]",
@@ -446,7 +450,7 @@
         "logicalName": "[variables('sitecoreTags').xc]"
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Web/serverfarms', variables('siHostingPlanNameTidy'))]"
+        "[resourceId('Microsoft.Web/serverfarms', variables('xcBasicHostingPlanNameTidy'))]"
       ]
     },
     {
@@ -455,7 +459,7 @@
       "apiVersion": "[variables('webApiVersion')]",
       "properties": {
         "clientCertEnabled": true,
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('siHostingPlanNameTidy'))]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('xcResourceIntensiveHostingPlanNameTidy'))]",
         "siteConfig": {
           "use32BitWorkerProcess": false,
           "alwaysOn": true,
@@ -467,7 +471,7 @@
       },
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[resourceId('Microsoft.Web/serverfarms', variables('siHostingPlanNameTidy'))]"
+        "[resourceId('Microsoft.Web/serverfarms', variables('xcResourceIntensiveHostingPlanNameTidy'))]"
       ],
       "tags": {
         "provider": "[variables('sitecoreTags').provider]",
@@ -509,7 +513,7 @@
       "apiVersion": "[variables('webApiVersion')]",
       "properties": {
         "clientCertEnabled": true,
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('siHostingPlanNameTidy'))]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('xcResourceIntensiveHostingPlanNameTidy'))]",
         "siteConfig": {
           "use32BitWorkerProcess": false,
           "alwaysOn": true,
@@ -521,7 +525,7 @@
       },
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[resourceId('Microsoft.Web/serverfarms', variables('siHostingPlanNameTidy'))]"
+        "[resourceId('Microsoft.Web/serverfarms', variables('xcResourceIntensiveHostingPlanNameTidy'))]"
       ],
       "tags": {
         "provider": "[variables('sitecoreTags').provider]",
@@ -621,7 +625,7 @@
       "apiVersion": "[variables('webApiVersion')]",
       "properties": {
         "clientCertEnabled": true,
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('siHostingPlanNameTidy'))]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('xcBasicHostingPlanNameTidy'))]",
         "siteConfig": {
           "use32BitWorkerProcess": false,
           "alwaysOn": true,
@@ -633,7 +637,7 @@
       },
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[resourceId('Microsoft.Web/serverfarms', variables('siHostingPlanNameTidy'))]"
+        "[resourceId('Microsoft.Web/serverfarms', variables('xcBasicHostingPlanNameTidy'))]"
       ],
       "tags": {
         "provider": "[variables('sitecoreTags').provider]",
