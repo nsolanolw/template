@@ -316,16 +316,6 @@
       "defaultValue": "[concat(toUpper(uniqueString('processingengine', parameters('passwordSalt'))), uniqueString('processingengine', parameters('sqlServerPassword'), parameters('passwordSalt')), toUpper(uniqueString('processingengine', parameters('sitecoreAdminPassword'), parameters('passwordSalt'))), '4@')]"
     },
 
-    "redisCacheName": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-redis')]"
-    },
-
-    "searchServiceName": {
-      "type": "string",
-      "defaultValue": "[concat(parameters('deploymentId'), '-as')]"
-    },
     "searchServiceLocation": {
       "type": "string",
       "defaultValue": "[parameters('location')]"
@@ -419,30 +409,6 @@
       "type": "string",
       "minLength": 1,
       "defaultValue": "[concat(parameters('deploymentId'), '-cd-hp')]"
-    },
-    "prcHostingPlanName": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-prc-hp')]"
-    },
-    "repHostingPlanName": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-rep-hp')]"
-    },
-    "xcBasicHostingPlanName": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-xc-basic-hp')]"
-    },
-    "xcResourceIntensiveHostingPlanName": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-xc-resourceintensive-hp')]"
-    },
-    "exmDdsHostingPlanName": {
-      "type": "string",
-      "defaultValue": "[concat(parameters('deploymentId'), '-exm-dds-hp')]"
     },
 
     "siWebAppName": {
@@ -811,17 +777,11 @@
             "value": "[empty(parameters('solrConnectionString'))]"
           },
 
-          "searchServiceName": {
-            "value": "[parameters('searchServiceName')]"
-          },
           "searchServiceLocation": {
             "value": "[parameters('searchServiceLocation')]"
           },
           "searchServiceReplicaCount": {
             "value": "[parameters('searchServiceReplicaCount')]"
-          },
-          "redisCacheName": {
-            "value": "[parameters('redisCacheName')]"
           },
           "useDedicatedHostingPlanForReporting": {
             "value": "[parameters('useDedicatedHostingPlanForReporting')]"
@@ -849,10 +809,10 @@
             "value": "[parameters('cdHostingPlanName')]"
           },
           "prcHostingPlanName": {
-            "value": "[parameters('prcHostingPlanName')]"
+            "value": "[parameters('siHostingPlanName')]"
           },
           "repHostingPlanName": {
-            "value": "[parameters('repHostingPlanName')]"
+            "value": "[parameters('siHostingPlanName')]"
           },
 
           "siWebAppName": {
@@ -978,10 +938,10 @@
           },
 
           "xcBasicHostingPlanName": {
-            "value": "[parameters('xcBasicHostingPlanName')]"
+            "value": "[parameters('siHostingPlanName')]"
           },
           "xcResourceIntensiveHostingPlanName": {
-            "value": "[parameters('xcResourceIntensiveHostingPlanName')]"
+            "value": "[parameters('siHostingPlanName')]"
           },
 
           "xcRefDataWebAppName": {
@@ -1028,7 +988,7 @@
           },
 
           "exmDdsHostingPlanName": {
-            "value": "[parameters('exmDdsHostingPlanName')]"
+            "value": "[parameters('siHostingPlanName')]"
           },
 
           "exmDdsWebAppName": {
@@ -1077,7 +1037,7 @@
           },
 
           "xcBasicHostingPlanName": {
-            "value": "[parameters('xcBasicHostingPlanName')]"
+            "value": "[parameters('siHostingPlanName')]"
           },
 
           "maOpsWebAppName": {
@@ -1131,10 +1091,10 @@
           },
 
           "xcBasicHostingPlanName": {
-            "value": "[parameters('xcBasicHostingPlanName')]"
+            "value": "[parameters('siHostingPlanName')]"
           },
           "xcResourceIntensiveHostingPlanName": {
-            "value": "[parameters('xcResourceIntensiveHostingPlanName')]"
+            "value": "[parameters('siHostingPlanName')]"
           },
 
           "cortexProcessingWebAppName": {
@@ -1282,14 +1242,6 @@
           "xcRefDataSqlDatabasePassword": {
             "value": "[parameters('xcRefDataSqlDatabasePassword')]"
           },
-
-          "redisCacheName": {
-            "value": "[parameters('redisCacheName')]"
-          },
-          "searchServiceName": {
-            "value": "[parameters('searchServiceName')]"
-          },
-
           "solrConnectionString": {
             "value": "[parameters('solrConnectionString')]"
           },
@@ -1497,9 +1449,6 @@
           },
           "xcMaSqlDatabasePassword": {
             "value": "[parameters('xcMaSqlDatabasePassword')]"
-          },
-          "searchServiceName": {
-            "value": "[parameters('searchServiceName')]"
           },
           "xcSearchIndexName": {
             "value": "[parameters('xcSearchIndexName')]"
@@ -1937,9 +1886,6 @@
             "value": "[parameters('xcRefDataSqlDatabasePassword')]"
           },
 
-          "searchServiceName": {
-            "value": "[parameters('searchServiceName')]"
-          },
 
           "solrConnectionString": {
             "value": "[parameters('solrConnectionString')]"
@@ -2117,7 +2063,6 @@
               "processingEngineSqlDatabaseUserName": "[parameters('processingEngineSqlDatabaseUserName')]",
               "processingEngineSqlDatabasePassword": "[parameters('processingEngineSqlDatabasePassword')]",
 
-              "searchServiceName": "[parameters('searchServiceName')]",
               "searchServiceLocation": "[parameters('searchServiceLocation')]",
               "xcSearchIndexName": "[parameters('xcSearchIndexName')]",
 
@@ -2125,7 +2070,6 @@
               "xcSolrConnectionString": "[parameters('xcSolrConnectionString')]",
               "machineLearningServerConnectionString": "[parameters('machineLearningServerConnectionString')]",
 
-              "redisCacheName": "[parameters('redisCacheName')]",
 
               "useApplicationInsights": "[parameters('useApplicationInsights')]",
               "applicationInsightsName": "[parameters('applicationInsightsName')]",
@@ -2134,10 +2078,10 @@
 
               "cmHostingPlanName": "[parameters('cmHostingPlanName')]",
               "cdHostingPlanName": "[parameters('cdHostingPlanName')]",
-              "prcHostingPlanName": "[parameters('prcHostingPlanName')]",
-              "repHostingPlanName": "[parameters('repHostingPlanName')]",
-              "xcBasicHostingPlanName": "[parameters('xcBasicHostingPlanName')]",
-              "xcResourceIntensiveHostingPlanName": "[parameters('xcResourceIntensiveHostingPlanName')]",
+              "prcHostingPlanName": "[parameters('siHostingPlanName')]",
+              "repHostingPlanName": "[parameters('siHostingPlanName')]",
+              "xcBasicHostingPlanName": "[parameters('siHostingPlanName')]",
+              "xcResourceIntensiveHostingPlanName": "[parameters('siHostingPlanName')]",
 
               "cmWebAppName": "[parameters('cmWebAppName')]",
               "cdWebAppName": "[parameters('cdWebAppName')]",
