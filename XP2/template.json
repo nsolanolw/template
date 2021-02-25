@@ -314,11 +314,7 @@
             "minLength": 8,
             "defaultValue": "[concat(toUpper(uniqueString('processingengine', parameters('passwordSalt'))), uniqueString('processingengine', parameters('sqlServerPassword'), parameters('passwordSalt')), toUpper(uniqueString('processingengine', parameters('sitecoreAdminPassword'), parameters('passwordSalt'))), '4@')]"
         },
-        "redisCacheName": {
-            "type": "string",
-            "minLength": 1,
-            "defaultValue": "[concat(parameters('deploymentId'), '-redis')]"
-        },
+
         "searchServiceName": {
             "type": "string",
             "defaultValue": "[concat(parameters('deploymentId'), '-as')]"
@@ -805,9 +801,7 @@
                     "searchServiceReplicaCount": {
                         "value": "[parameters('searchServiceReplicaCount')]"
                     },
-                    "redisCacheName": {
-                        "value": "[parameters('redisCacheName')]"
-                    },
+
                     "useDedicatedHostingPlanForReporting": {
                         "value": "[parameters('useDedicatedHostingPlanForReporting')]"
                     },
@@ -1239,9 +1233,7 @@
                     "xcRefDataSqlDatabasePassword": {
                         "value": "[parameters('xcRefDataSqlDatabasePassword')]"
                     },
-                    "redisCacheName": {
-                        "value": "[parameters('redisCacheName')]"
-                    },
+
                     "searchServiceName": {
                         "value": "[parameters('searchServiceName')]"
                     },
@@ -1998,7 +1990,6 @@
                             "solrConnectionString": "[parameters('solrConnectionString')]",
                             "xcSolrConnectionString": "[parameters('xcSolrConnectionString')]",
                             "machineLearningServerConnectionString": "[parameters('machineLearningServerConnectionString')]",
-                            "redisCacheName": "[parameters('redisCacheName')]",
                             "useApplicationInsights": "[parameters('useApplicationInsights')]",
                             "applicationInsightsName": "[parameters('applicationInsightsName')]",
                             "applicationInsightsLocation": "[parameters('applicationInsightsLocation')]",
