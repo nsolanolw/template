@@ -13,9 +13,7 @@
     "shard1SqlDatabaseNameTidy": "[toLower(trim(parameters('shard1SqlDatabaseName')))]",
     "refDataSqlDatabaseNameTidy": "[toLower(trim(parameters('refDataSqlDatabaseName')))]",
     "refDataSqlDatabaseCollation": "Latin1_General_CS_AS",
-
-
-    "siHostingPlanNameTidy": "[toLower(trim(parameters('siHostingPlanName')))]",
+   "siHostingPlanNameTidy": "[toLower(trim(parameters('siHostingPlanName')))]",
     "xcBasicHostingPlanNameTidy": "[toLower(trim(parameters('xcBasicHostingPlanName')))]",
     "xcResourceIntensiveHostingPlanNameTidy": "[toLower(trim(parameters('xcResourceIntensiveHostingPlanName')))]",
 
@@ -39,10 +37,23 @@
     "aseResourceId": "[resourceId(parameters('aseResourceGroupName'), 'Microsoft.Web/hostingEnvironments', parameters('aseName'))]",
     "hostingPlanProperties": {
       "xcBasicProperties": {
-        "name": "[variables('siHostingPlanNameTidy')]"
+        "name": "[variables('xcBasicHostingPlanNameTidy')]"
+      },
+      "xcBasicPropertiesWithASE": {
+        "name": "[variables('xcBasicHostingPlanNameTidy')]",
+        "hostingEnvironmentProfile": {
+          "id": "[variables('aseResourceId')]"
+        }
+      },
+      "xcResourceIntensiveProperties": {
+        "name": "[variables('xcResourceIntensiveHostingPlanNameTidy')]"
+      },
+      "xcResourceIntensivePropertiesWithASE": {
+        "name": "[variables('xcResourceIntensiveHostingPlanNameTidy')]",
+        "hostingEnvironmentProfile": {
+          "id": "[variables('aseResourceId')]"
+        }
       }
-
-
     }
   },
   "parameters": {
@@ -50,7 +61,6 @@
       "type": "string",
       "defaultValue": "[resourceGroup().name]"
     },
-
     "location": {
       "type": "string",
       "minLength": 1,
@@ -105,12 +115,12 @@
     "xcBasicHostingPlanName": {
       "type": "string",
       "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-si-hp')]"
+      "defaultValue": "[concat(parameters('deploymentId'), '-xc-basic-hp')]"
     },
     "xcResourceIntensiveHostingPlanName": {
       "type": "string",
       "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-si-hp')]"
+      "defaultValue": "[concat(parameters('deploymentId'), '-xc-resourceintensive-hp')]"
     },
 
     "xcRefDataWebAppName": {
@@ -414,8 +424,6 @@
     }
   },
   "resources": [
-
-
     {
       "type": "Microsoft.Web/sites",
       "name": "[variables('xcRefDataWebAppNameTidy')]",
