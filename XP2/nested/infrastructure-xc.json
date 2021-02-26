@@ -153,6 +153,10 @@
       "type": "secureObject",
       "defaultValue": {
         "Extra Small": {
+          "siHostingPlan": {
+            "SkuName": "S1",
+            "SkuCapacity": 1
+          },
           "xcBasicHostingPlan": {
             "SkuName": "S1",
             "SkuCapacity": 1
@@ -191,6 +195,10 @@
           }
         },
         "Small": {
+          "siHostingPlan": {
+            "SkuName": "S1",
+            "SkuCapacity": 1
+          },
           "xcBasicHostingPlan": {
             "SkuName": "S1",
             "SkuCapacity": 1
@@ -229,6 +237,10 @@
           }
         },
         "Medium": {
+          "siHostingPlan": {
+            "SkuName": "S1",
+            "SkuCapacity": 1
+          },
           "xcBasicHostingPlan": {
             "SkuName": "S2",
             "SkuCapacity": 1
@@ -267,6 +279,10 @@
           }
         },
         "Large": {
+          "siHostingPlan": {
+            "SkuName": "S2",
+            "SkuCapacity": 1
+          },
           "xcBasicHostingPlan": {
             "SkuName": "S2",
             "SkuCapacity": 1
@@ -305,6 +321,10 @@
           }
         },
         "Extra Large": {
+          "siHostingPlan": {
+            "SkuName": "S3",
+            "SkuCapacity": 1
+          },
           "xcBasicHostingPlan": {
             "SkuName": "S3",
             "SkuCapacity": 1
@@ -343,6 +363,10 @@
           }
         },
         "2x Large": {
+          "siHostingPlan": {
+            "SkuName": "S3",
+            "SkuCapacity": 1
+          },
           "xcBasicHostingPlan": {
             "SkuName": "S3",
             "SkuCapacity": 2
@@ -381,6 +405,10 @@
           }
         },
         "3x Large": {
+          "siHostingPlan": {
+            "SkuName": "S3",
+            "SkuCapacity": 1
+          },
           "xcBasicHostingPlan": {
             "SkuName": "S3",
             "SkuCapacity": 2
