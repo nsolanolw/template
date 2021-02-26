@@ -11,8 +11,7 @@
     "processingEngineStorageSqlDatabaseNameTidy": "[toLower(trim(parameters('processingEngineStorageSqlDatabaseName')))]",
     "reportingSqlDatabaseNameTidy": "[toLower(trim(parameters('reportingSqlDatabaseName')))]",
 
-    "xcBasicHostingPlanNameTidy": "[toLower(trim(parameters('xcBasicHostingPlanName')))]",
-    "xcResourceIntensiveHostingPlanNameTidy": "[toLower(trim(parameters('xcResourceIntensiveHostingPlanName')))]",
+
 
     "cortexProcessingWebAppNameTidy": "[toLower(trim(parameters('cortexProcessingWebAppName')))]",
     "cortexReportingWebAppNameTidy": "[toLower(trim(parameters('cortexReportingWebAppName')))]",
@@ -73,16 +72,7 @@
       "defaultValue": "[concat(parameters('deploymentId'), '-reporting-db')]"
     },
 
-    "xcBasicHostingPlanName": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-xc-basic-hp')]"
-    },
-    "xcResourceIntensiveHostingPlanName": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-xc-resourceintensive-hp')]"
-    },
+
     "siHostingPlanName": {
       "type": "string",
       "minLength": 1,

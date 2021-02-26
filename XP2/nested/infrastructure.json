@@ -6,7 +6,7 @@
     "serverFarmApiVersion": "2018-02-01",
     "dbApiVersion": "2014-04-01-preview",
     "searchApiVersion": "2015-08-19",
-    "redisApiVersion": "2016-04-01",
+
     "appInsightsApiVersion": "2015-05-01",
     "certificateApiVersion": "2014-11-01",
 
@@ -32,7 +32,7 @@
     "repWebAppNameTidy": "[toLower(trim(parameters('repWebAppName')))]",
 
     "searchServiceNameTidy": "[toLower(trim(parameters('searchServiceName')))]",
-    "redisCacheNameTidy": "[toLower(trim(parameters('redisCacheName')))]",
+
     "appInsightsNameTidy": "[toLower(trim(parameters('applicationInsightsName')))]",
     "applicationInsightsPricePlanTidy": "[toLower(trim(parameters('applicationInsightsPricePlan')))]",
     "authCertificateNameTidy": "[toLower(trim(parameters('authCertificateName')))]",
@@ -172,7 +172,6 @@
       "type": "bool",
       "defaultValue": true
     },
-    
     "searchServiceName": {
       "type": "string",
       "defaultValue": "[concat(parameters('deploymentId'), '-as')]"
@@ -186,15 +185,7 @@
       "defaultValue": 1
     },
 
-    "redisCacheName": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-redis')]"
-    },
-    "useDedicatedHostingPlanForReporting": { 
-      "type": "bool",
-      "defaultValue": false
-    },
+
     "useApplicationInsights": {
       "type": "bool",
       "defaultValue": true
@@ -229,16 +220,7 @@
       "minLength": 1,
       "defaultValue": "[concat(parameters('deploymentId'), '-cd-hp')]"
     },
-    "prcHostingPlanName": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-prc-hp')]"
-    },
-    "repHostingPlanName": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-rep-hp')]"
-    },
+
 
     "siWebAppName": {
       "type": "string",
