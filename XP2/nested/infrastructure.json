@@ -83,24 +83,6 @@
           "id": "[variables('aseResourceId')]"
         }
       },
-      "prcProperties":{
-        "name": "[variables('siHostingPlanNameTidy')]"
-      },
-      "prcPropertiesWithASE":{
-        "name": "[variables('siHostingPlanNameTidy')]",
-        "hostingEnvironmentProfile": {
-          "id": "[variables('aseResourceId')]"
-        }
-      },
-      "repProperties":{
-        "name": "[variables('siHostingPlanNameTidy')]"
-      },
-      "repPropertiesWithASE":{
-        "name": "[variables('siHostingPlanNameTidy')]",
-        "hostingEnvironmentProfile": {
-          "id": "[variables('aseResourceId')]"
-        }
-      },
       "authCertificateHostingEnvironmentProfile": {
         "id": "[variables('aseResourceId')]"
       }

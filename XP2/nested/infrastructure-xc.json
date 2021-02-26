@@ -40,22 +40,9 @@
     "hostingPlanProperties": {
       "xcBasicProperties": {
         "name": "[variables('siHostingPlanNameTidy')]"
-      },
-      "xcBasicPropertiesWithASE": {
-        "name": "[variables('siHostingPlanNameTidy')]",
-        "hostingEnvironmentProfile": {
-          "id": "[variables('aseResourceId')]"
-        }
-      },
-      "xcResourceIntensiveProperties": {
-        "name": "[variables('siHostingPlanNameTidy')]"
-      },
-      "xcResourceIntensivePropertiesWithASE": {
-        "name": "[variables('siHostingPlanNameTidy')]",
-        "hostingEnvironmentProfile": {
-          "id": "[variables('aseResourceId')]"
-        }
       }
+
+
     }
   },
   "parameters": {
