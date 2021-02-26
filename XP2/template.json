@@ -805,9 +805,6 @@
                     "searchServiceReplicaCount": {
                         "value": "[parameters('searchServiceReplicaCount')]"
                     },
-                    "redisCacheName": {
-                        "value": "[parameters('redisCacheName')]"
-                    },
                     "useDedicatedHostingPlanForReporting": {
                         "value": "[parameters('useDedicatedHostingPlanForReporting')]"
                     },
@@ -831,12 +828,6 @@
                     },
                     "cdHostingPlanName": {
                         "value": "[parameters('cdHostingPlanName')]"
-                    },
-                    "prcHostingPlanName": {
-                        "value": "[parameters('prcHostingPlanName')]"
-                    },
-                    "repHostingPlanName": {
-                        "value": "[parameters('repHostingPlanName')]"
                     },
                     "siWebAppName": {
                         "value": "[parameters('siWebAppName')]"
