@@ -297,22 +297,6 @@
             "SkuName": "I2",
             "SkuCapacity": 1
           },
-          "prcHostingPlan": {
-            "SkuName": "S1",
-            "SkuCapacity": 1
-          },
-          "prcHostingPlanIsolated": {
-            "SkuName": "I1",
-            "SkuCapacity": 1
-          },
-          "repHostingPlan": {
-            "SkuName": "S1",
-            "SkuCapacity": 1
-          },
-          "repHostingPlanIsolated": {
-            "SkuName": "I1",
-            "SkuCapacity": 1
-          },
           "coreSqlDatabase": {
             "Edition": "Standard",
             "MaxSize": "268435456000",
@@ -389,22 +373,6 @@
           "cdHostingPlanIsolated": {
             "SkuName": "I2",
             "SkuCapacity": 2
-          },
-          "prcHostingPlan": {
-            "SkuName": "S1",
-            "SkuCapacity": 1
-          },
-          "prcHostingPlanIsolated": {
-            "SkuName": "I1",
-            "SkuCapacity": 1
-          },
-          "repHostingPlan": {
-            "SkuName": "S1",
-            "SkuCapacity": 1
-          },
-          "repHostingPlanIsolated": {
-            "SkuName": "I1",
-            "SkuCapacity": 1
           },
           "coreSqlDatabase": {
             "Edition": "Standard",
@@ -483,22 +451,6 @@
             "SkuName": "I2",
             "SkuCapacity": 2
           },
-          "prcHostingPlan": {
-            "SkuName": "S1",
-            "SkuCapacity": 1
-          },
-          "prcHostingPlanIsolated": {
-            "SkuName": "I1",
-            "SkuCapacity": 1
-          },
-          "repHostingPlan": {
-            "SkuName": "S2",
-            "SkuCapacity": 1
-          },
-          "repHostingPlanIsolated": {
-            "SkuName": "I1",
-            "SkuCapacity": 1
-          },
           "coreSqlDatabase": {
             "Edition": "Standard",
             "MaxSize": "268435456000",
@@ -575,22 +527,6 @@
           "cdHostingPlanIsolated": {
             "SkuName": "I2",
             "SkuCapacity": 3
-          },
-          "prcHostingPlan": {
-            "SkuName": "S2",
-            "SkuCapacity": 1
-          },
-          "prcHostingPlanIsolated": {
-            "SkuName": "I2",
-            "SkuCapacity": 1
-          },
-          "repHostingPlan": {
-            "SkuName": "S2",
-            "SkuCapacity": 1
-          },
-          "repHostingPlanIsolated": {
-            "SkuName": "I1",
-            "SkuCapacity": 1
           },
           "coreSqlDatabase": {
             "Edition": "Standard",
@@ -669,22 +605,6 @@
             "SkuName": "I3",
             "SkuCapacity": 2
           },
-          "prcHostingPlan": {
-            "SkuName": "S2",
-            "SkuCapacity": 1
-          },
-          "prcHostingPlanIsolated": {
-            "SkuName": "I2",
-            "SkuCapacity": 1
-          },
-          "repHostingPlan": {
-            "SkuName": "S2",
-            "SkuCapacity": 1
-          },
-          "repHostingPlanIsolated": {
-            "SkuName": "I2",
-            "SkuCapacity": 1
-          },
           "coreSqlDatabase": {
             "Edition": "Standard",
             "MaxSize": "268435456000",
@@ -762,22 +682,6 @@
             "SkuName": "I3",
             "SkuCapacity": 2
           },
-          "prcHostingPlan": {
-            "SkuName": "S2",
-            "SkuCapacity": 1
-          },
-          "prcHostingPlanIsolated": {
-            "SkuName": "I2",
-            "SkuCapacity": 1
-          },
-          "repHostingPlan": {
-            "SkuName": "S2",
-            "SkuCapacity": 1
-          },
-          "repHostingPlanIsolated": {
-            "SkuName": "I2",
-            "SkuCapacity": 1
-          },
           "coreSqlDatabase": {
             "Edition": "Standard",
             "MaxSize": "268435456000",
@@ -854,22 +758,6 @@
           "cdHostingPlanIsolated": {
             "SkuName": "I3",
             "SkuCapacity": 8
-          },
-          "prcHostingPlan": {
-            "SkuName": "S3",
-            "SkuCapacity": 1
-          },
-          "prcHostingPlanIsolated": {
-            "SkuName": "I2",
-            "SkuCapacity": 1
-          },
-          "repHostingPlan": {
-            "SkuName": "S2",
-            "SkuCapacity": 1
-          },
-          "repHostingPlanIsolated": {
-            "SkuName": "I2",
-            "SkuCapacity": 1
           },
           "coreSqlDatabase": {
             "Edition": "Standard",
