@@ -23,8 +23,7 @@
     "siHostingPlanNameTidy": "[toLower(trim(parameters('siHostingPlanName')))]",
     "cmHostingPlanNameTidy": "[toLower(trim(parameters('cmHostingPlanName')))]",
     "cdHostingPlanNameTidy": "[toLower(trim(parameters('cdHostingPlanName')))]",
-    "prcHostingPlanNameTidy": "[toLower(trim(parameters('prcHostingPlanName')))]",
-    "repHostingPlanNameTidy": "[toLower(trim(parameters('repHostingPlanName')))]",
+
 
     "siWebAppNameTidy": "[toLower(trim(parameters('siWebAppName')))]",
     "cmWebAppNameTidy": "[toLower(trim(parameters('cmWebAppName')))]",
@@ -229,16 +228,7 @@
       "minLength": 1,
       "defaultValue": "[concat(parameters('deploymentId'), '-cd-hp')]"
     },
-    "prcHostingPlanName": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-si-hp')]"
-    },
-    "repHostingPlanName": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-si-hp')]"
-    },
+
 
     "siWebAppName": {
       "type": "string",
@@ -1404,9 +1394,7 @@
       "dependsOn": [
         "[resourceId('Microsoft.Web/serverfarms', variables('siHostingPlanNameTidy'))]",
         "[resourceId('Microsoft.Web/serverfarms', variables('cmHostingPlanNameTidy'))]",
-        "[resourceId('Microsoft.Web/serverfarms', variables('cdHostingPlanNameTidy'))]",
-        "[resourceId('Microsoft.Web/serverfarms', variables('prcHostingPlanNameTidy'))]",
-        "[resourceId('Microsoft.Web/serverfarms', variables('repHostingPlanNameTidy'))]"
+        "[resourceId('Microsoft.Web/serverfarms', variables('cdHostingPlanNameTidy'))]"
       ],
       "properties": {
         "password": "[parameters('authCertificatePassword')]",
