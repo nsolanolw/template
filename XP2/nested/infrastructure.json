@@ -250,12 +250,12 @@
     "prcHostingPlanName": {
       "type": "string",
       "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-prc-hp')]"
+      "defaultValue": "[concat(parameters('deploymentId'), '-si-hp')]"
     },
     "repHostingPlanName": {
       "type": "string",
       "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-rep-hp')]"
+      "defaultValue": "[concat(parameters('deploymentId'), '-si-hp')]"
     },
 
     "siWebAppName": {

@@ -111,12 +111,12 @@
     "xcBasicHostingPlanName": {
       "type": "string",
       "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-xc-basic-hp')]"
+      "defaultValue": "[concat(parameters('deploymentId'), '-si-hp')]"
     },
     "xcResourceIntensiveHostingPlanName": {
       "type": "string",
       "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-xc-resourceintensive-hp')]"
+      "defaultValue": "[concat(parameters('deploymentId'), '-si-hp')]"
     },
 
     "xcRefDataWebAppName": {
