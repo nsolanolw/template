@@ -433,7 +433,7 @@
       "apiVersion": "[variables('webApiVersion')]",
       "properties": {
         "clientCertEnabled": true,
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('siHostingPlanName'))]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('siHostingPlanNameTidy'))]",
         "siteConfig": {
           "use32BitWorkerProcess": false,
           "alwaysOn": true,
@@ -487,7 +487,7 @@
       "apiVersion": "[variables('webApiVersion')]",
       "properties": {
         "clientCertEnabled": true,
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('siHostingPlanName'))]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('siHostingPlanNameTidy'))]",
         "siteConfig": {
           "use32BitWorkerProcess": false,
           "alwaysOn": true,
@@ -599,7 +599,7 @@
       "apiVersion": "[variables('webApiVersion')]",
       "properties": {
         "clientCertEnabled": true,
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('siHostingPlanName'))]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('siHostingPlanNameTidy'))]",
         "siteConfig": {
           "use32BitWorkerProcess": false,
           "alwaysOn": true,

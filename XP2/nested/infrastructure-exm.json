@@ -149,7 +149,7 @@
       "name": "[variables('exmDdsWebAppNameTidy')]",
       "apiVersion": "[variables('webApiVersion')]",
       "properties": {
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('siHostingPlanName'))]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('siHostingPlanNameTidy'))]",
         "siteConfig": {
           "use32BitWorkerProcess": false,
           "alwaysOn": true,
