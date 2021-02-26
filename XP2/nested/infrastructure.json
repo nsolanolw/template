@@ -809,7 +809,24 @@
     }
   },
   "resources": [
-
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "name": "[variables('siHostingPlanNameTidy')]",
+      "apiVersion": "[variables('serverFarmApiVersion')]",
+      "sku": {
+        "name": "[parameters('resourceSizes').siHostingPlan.SkuName]",
+        "capacity": "[parameters('resourceSizes').siHostingPlan.SkuCapacity]"
+      },
+      "properties": "[variables('hostingPlanProperties').cmProperties]",
+      "location": "[parameters('location')]",
+      "tags": {
+        "provider": "[variables('sitecoreTags').provider]",
+        "logicalName": "[variables('sitecoreTags').si]"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', variables('siHostingPlanNameTidy'))]"
+      ]
+    },
     {
       "type": "Microsoft.Web/serverfarms",
       "name": "[variables('cmHostingPlanNameTidy')]",
