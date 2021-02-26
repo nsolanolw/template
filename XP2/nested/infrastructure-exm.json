@@ -4,7 +4,7 @@
   "variables": {
     "webApiVersion": "2018-02-01",
     "serverFarmApiVersion": "2018-02-01",
-
+   "siHostingPlanNameTidy": "[toLower(trim(parameters('siHostingPlanName')))]",
     "exmDdsHostingPlanNameTidy": "[toLower(trim(parameters('exmDdsHostingPlanName')))]",
     "exmDdsWebAppNameTidy": "[toLower(trim(parameters('exmDdsWebAppName')))]",
     "useAse": "[not(empty(parameters('aseName')))]",
@@ -41,6 +41,11 @@
       "metadata": {
         "description": "Sitecore SKU controls the sizes and service levels of the provisioned resources"
       }
+    },
+    "siHostingPlanName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('deploymentId'), '-si-hp')]"
     },
     "exmDdsHostingPlanName": {
       "type": "string",
@@ -139,27 +144,13 @@
     }
   },
   "resources": [
-    {
-      "type": "Microsoft.Web/serverfarms",
-      "name": "[variables('exmDdsHostingPlanNameTidy')]",
-      "apiVersion": "[variables('serverFarmApiVersion')]",
-      "sku": {
-        "name": "[if(not(variables('useAse')), parameters('resourceSizes').exmDdsHostingPlan.SkuName, parameters('resourceSizes').exmDdsHostingPlanIsolated.SkuName)]",
-        "capacity": "[if(not(variables('useAse')), parameters('resourceSizes').exmDdsHostingPlan.SkuCapacity, parameters('resourceSizes').exmDdsHostingPlanIsolated.SkuCapacity)]"
-      },
-      "properties": "[if(not(variables('useAse')), variables('hostingPlanProperties').exmDdsProperties, variables('hostingPlanProperties').exmDdsPropertiesWithASE)]",
-      "location": "[parameters('location')]",
-      "tags": {
-        "provider": "[variables('sitecoreTags').provider]",
-        "logicalName": "[variables('sitecoreTags').dds]"
-      }
-    },
+    
     {
       "type": "Microsoft.Web/sites",
       "name": "[variables('exmDdsWebAppNameTidy')]",
       "apiVersion": "[variables('webApiVersion')]",
       "properties": {
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('exmDdsHostingPlanNameTidy'))]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('siHostingPlanNameTidy'))]",
         "siteConfig": {
           "use32BitWorkerProcess": false,
           "alwaysOn": true,
@@ -171,7 +162,7 @@
       },
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[resourceId('Microsoft.Web/serverfarms', variables('exmDdsHostingPlanNameTidy'))]"
+        "[resourceId('Microsoft.Web/serverfarms', variables('siHostingPlanNameTidy'))]"
       ],
       "tags": {
         "provider": "[variables('sitecoreTags').provider]",
