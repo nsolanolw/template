@@ -23,8 +23,7 @@
     "siHostingPlanNameTidy": "[toLower(trim(parameters('siHostingPlanName')))]",
     "cmHostingPlanNameTidy": "[toLower(trim(parameters('cmHostingPlanName')))]",
     "cdHostingPlanNameTidy": "[toLower(trim(parameters('cdHostingPlanName')))]",
-    "prcHostingPlanNameTidy": "[toLower(trim(parameters('siHostingPlanName')))]",
-    "repHostingPlanNameTidy": "[toLower(trim(parameters('siHostingPlanName')))]",
+
 
     "siWebAppNameTidy": "[toLower(trim(parameters('siWebAppName')))]",
     "cmWebAppNameTidy": "[toLower(trim(parameters('cmWebAppName')))]",
@@ -80,24 +79,6 @@
       },
       "cdPropertiesWithASE":{
         "name": "[variables('cdHostingPlanNameTidy')]",
-        "hostingEnvironmentProfile": {
-          "id": "[variables('aseResourceId')]"
-        }
-      },
-      "prcProperties":{
-        "name": "[variables('prcHostingPlanNameTidy')]"
-      },
-      "prcPropertiesWithASE":{
-        "name": "[variables('prcHostingPlanNameTidy')]",
-        "hostingEnvironmentProfile": {
-          "id": "[variables('aseResourceId')]"
-        }
-      },
-      "repProperties":{
-        "name": "[variables('repHostingPlanNameTidy')]"
-      },
-      "repPropertiesWithASE":{
-        "name": "[variables('repHostingPlanNameTidy')]",
         "hostingEnvironmentProfile": {
           "id": "[variables('aseResourceId')]"
         }
@@ -1103,7 +1084,7 @@
       "name": "[variables('prcWebAppNameTidy')]",
       "apiVersion": "[variables('webApiVersion')]",
       "properties": {
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('siHostingPlanNameTidy'))]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('siHostingPlanName'))]",
         "siteConfig": {
           "use32BitWorkerProcess": false,
           "alwaysOn": true,
@@ -1124,7 +1105,7 @@
       "name": "[variables('repWebAppNameTidy')]",
       "apiVersion": "[variables('webApiVersion')]",
       "properties": {
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('siHostingPlanNameTidy'))]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('siHostingPlanName'))]",
         "siteConfig": {
           "use32BitWorkerProcess": false,
           "alwaysOn": true,
@@ -1394,23 +1375,6 @@
       }
     },
     {
-      "type": "Microsoft.Cache/Redis",
-      "name": "[variables('redisCacheNameTidy')]",
-      "apiVersion": "[variables('redisApiVersion')]",
-      "location": "[parameters('location')]",
-      "properties": {
-        "sku": {
-          "name": "[parameters('resourceSizes').redisCache.SkuName]",
-          "family": "[parameters('resourceSizes').redisCache.SkuFamily]",
-          "capacity": "[parameters('resourceSizes').redisCache.SkuCapacity]"
-        },
-        "enableNonSslPort": false
-      },
-      "tags": {
-        "provider": "[variables('sitecoreTags').provider]"
-      }
-    },
-    {
       "type": "Microsoft.Insights/Components",
       "condition": "[parameters('useApplicationInsights')]",
       "name": "[variables('appInsightsNameTidy')]",
@@ -1451,9 +1415,7 @@
       "dependsOn": [
         "[resourceId('Microsoft.Web/serverfarms', variables('siHostingPlanNameTidy'))]",
         "[resourceId('Microsoft.Web/serverfarms', variables('cmHostingPlanNameTidy'))]",
-        "[resourceId('Microsoft.Web/serverfarms', variables('cdHostingPlanNameTidy'))]",
-        "[resourceId('Microsoft.Web/serverfarms', variables('prcHostingPlanNameTidy'))]",
-        "[resourceId('Microsoft.Web/serverfarms', variables('repHostingPlanNameTidy'))]"
+        "[resourceId('Microsoft.Web/serverfarms', variables('cdHostingPlanNameTidy'))]"
       ],
       "properties": {
         "password": "[parameters('authCertificatePassword')]",
