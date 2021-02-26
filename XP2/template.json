@@ -960,9 +960,6 @@
                     "xcResourceIntensiveHostingPlanName": {
                         "value": "[parameters('siHostingPlanName')]"
                     },
-                    "siHostingPlanName": {
-                        "value": "[parameters('siHostingPlanName')]"
-                    },
                     "xcRefDataWebAppName": {
                         "value": "[parameters('xcRefDataWebAppName')]"
                     },
