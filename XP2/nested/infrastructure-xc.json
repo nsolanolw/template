@@ -157,6 +157,10 @@
             "SkuName": "S1",
             "SkuCapacity": 1
           },
+          "siHostingPlanIsolated": {
+            "SkuName": "I1",
+            "SkuCapacity": 1
+          },
           "xcBasicHostingPlan": {
             "SkuName": "S1",
             "SkuCapacity": 1
@@ -197,6 +201,10 @@
         "Small": {
           "siHostingPlan": {
             "SkuName": "S1",
+            "SkuCapacity": 1
+          },
+          "siHostingPlanIsolated": {
+            "SkuName": "I1",
             "SkuCapacity": 1
           },
           "xcBasicHostingPlan": {
@@ -241,6 +249,10 @@
             "SkuName": "S1",
             "SkuCapacity": 1
           },
+          "siHostingPlanIsolated": {
+            "SkuName": "I1",
+            "SkuCapacity": 1
+          },
           "xcBasicHostingPlan": {
             "SkuName": "S2",
             "SkuCapacity": 1
@@ -281,6 +293,10 @@
         "Large": {
           "siHostingPlan": {
             "SkuName": "S2",
+            "SkuCapacity": 1
+          },
+          "siHostingPlanIsolated": {
+            "SkuName": "I1",
             "SkuCapacity": 1
           },
           "xcBasicHostingPlan": {
@@ -325,6 +341,10 @@
             "SkuName": "S3",
             "SkuCapacity": 1
           },
+          "siHostingPlanIsolated": {
+            "SkuName": "I1",
+            "SkuCapacity": 1
+          },
           "xcBasicHostingPlan": {
             "SkuName": "S3",
             "SkuCapacity": 1
@@ -367,6 +387,10 @@
             "SkuName": "S3",
             "SkuCapacity": 1
           },
+          "siHostingPlanIsolated": {
+            "SkuName": "I1",
+            "SkuCapacity": 1
+          },
           "xcBasicHostingPlan": {
             "SkuName": "S3",
             "SkuCapacity": 2
@@ -407,6 +431,10 @@
         "3x Large": {
           "siHostingPlan": {
             "SkuName": "S3",
+            "SkuCapacity": 1
+          },
+          "siHostingPlanIsolated": {
+            "SkuName": "I1",
             "SkuCapacity": 1
           },
           "xcBasicHostingPlan": {
