@@ -955,9 +955,12 @@
                         "value": "[parameters('refDataSqlDatabaseName')]"
                     },
                     "xcBasicHostingPlanName": {
-                        "value": "[parameters('siHostingPlanName')]"
+                        "value": "[parameters('xcBasicHostingPlanName')]"
                     },
                     "xcResourceIntensiveHostingPlanName": {
+                        "value": "[parameters('xcResourceIntensiveHostingPlanName')]"
+                    },
+                    "siHostingPlanName": {
                         "value": "[parameters('siHostingPlanName')]"
                     },
                     "xcRefDataWebAppName": {
@@ -1047,6 +1050,9 @@
                     "xcBasicHostingPlanName": {
                         "value": "[parameters('xcBasicHostingPlanName')]"
                     },
+                    "siHostingPlanName": {
+                        "value": "[parameters('siHostingPlanName')]"
+                    },
                     "maOpsWebAppName": {
                         "value": "[parameters('maOpsWebAppName')]"
                     },
@@ -1098,6 +1104,9 @@
                     },
                     "xcResourceIntensiveHostingPlanName": {
                         "value": "[parameters('xcResourceIntensiveHostingPlanName')]"
+                    },
+                    "siHostingPlanName": {
+                        "value": "[parameters('siHostingPlanName')]"
                     },
                     "cortexProcessingWebAppName": {
                         "value": "[parameters('cortexProcessingWebAppName')]"
