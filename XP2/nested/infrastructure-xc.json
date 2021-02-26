@@ -13,8 +13,7 @@
     "shard1SqlDatabaseNameTidy": "[toLower(trim(parameters('shard1SqlDatabaseName')))]",
     "refDataSqlDatabaseNameTidy": "[toLower(trim(parameters('refDataSqlDatabaseName')))]",
     "refDataSqlDatabaseCollation": "Latin1_General_CS_AS",
-    "siWebAppNameTidy": "[toLower(trim(parameters('siWebAppName')))]",
-    "siHostingPlanNameTidy": "[toLower(trim(parameters('siHostingPlanName')))]",
+
     "xcBasicHostingPlanNameTidy": "[toLower(trim(parameters('siHostingPlanName')))]",
     "xcResourceIntensiveHostingPlanNameTidy": "[toLower(trim(parameters('siHostingPlanName')))]",
 
@@ -38,15 +37,7 @@
     "useAse": "[not(empty(parameters('aseName')))]",
     "aseResourceId": "[resourceId(parameters('aseResourceGroupName'), 'Microsoft.Web/hostingEnvironments', parameters('aseName'))]",
     "hostingPlanProperties": {
-      "siProperties":{
-        "name": "[variables('siHostingPlanNameTidy')]"
-      },
-      "siPropertiesWithASE":{
-        "name": "[variables('siHostingPlanNameTidy')]",
-        "hostingEnvironmentProfile": {
-          "id": "[variables('aseResourceId')]"
-        }
-      },
+
       "xcBasicProperties": {
         "name": "[variables('xcBasicHostingPlanNameTidy')]"
       },
@@ -685,36 +676,6 @@
       "tags": {
         "provider": "[variables('sitecoreTags').provider]",
         "logicalName": "[variables('sitecoreTags').xcSearch]"
-      }
-    },
-    {
-      "type": "Microsoft.Web/sites",
-      "name": "[variables('siWebAppNameTidy')]",
-      "location": "[parameters('location')]",
-      "apiVersion": "[variables('webApiVersion')]",
-      "properties": {
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('siHostingPlanNameTidy'))]",
-        "siteConfig": {
-          "use32BitWorkerProcess": false,
-          "alwaysOn": true,
-          "phpVersion": "",
-          "defaultDocuments": [
-            "index.html"
-          ],
-          "metadata": [
-            {
-              "name": "CURRENT_STACK",
-              "value": "dotnetcore"
-            }
-          ]
-        }
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Web/serverfarms', variables('siHostingPlanNameTidy'))]"
-      ],
-      "tags": {
-        "provider": "[variables('sitecoreTags').provider]",
-        "logicalName": "[variables('sitecoreTags').si]"
       }
     }
   ]
