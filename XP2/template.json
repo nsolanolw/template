@@ -1983,8 +1983,6 @@
                             "cmHostingPlanName": "[parameters('cmHostingPlanName')]",
                             "cdHostingPlanName": "[parameters('cdHostingPlanName')]",
                             "siHostingPlanName": "[parameters('siHostingPlanName')]",
-                            "xcBasicHostingPlanName": "[parameters('siHostingPlanName')]",
-                            "xcResourceIntensiveHostingPlanName": "[parameters('siHostingPlanName')]",
                             "cmWebAppName": "[parameters('cmWebAppName')]",
                             "cdWebAppName": "[parameters('cdWebAppName')]",
                             "prcWebAppName": "[parameters('prcWebAppName')]",
