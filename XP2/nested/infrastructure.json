@@ -32,8 +32,7 @@
     "prcWebAppNameTidy": "[toLower(trim(parameters('prcWebAppName')))]",
     "repWebAppNameTidy": "[toLower(trim(parameters('repWebAppName')))]",
 
-    "searchServiceNameTidy": "[toLower(trim(parameters('searchServiceName')))]",
-    "redisCacheNameTidy": "[toLower(trim(parameters('redisCacheName')))]",
+
     "appInsightsNameTidy": "[toLower(trim(parameters('applicationInsightsName')))]",
     "applicationInsightsPricePlanTidy": "[toLower(trim(parameters('applicationInsightsPricePlan')))]",
     "authCertificateNameTidy": "[toLower(trim(parameters('authCertificateName')))]",
@@ -1417,40 +1416,6 @@
           }
         }
       ]
-    },
-    {
-      "type": "Microsoft.Search/searchServices",
-      "condition": "[parameters('deployAzureSearch')]",
-      "apiVersion": "[variables('searchApiVersion')]",
-      "name": "[variables('searchServiceNameTidy')]",
-      "location": "[if(parameters('deployAzureSearch'), parameters('searchServiceLocation'), 'westus')]",
-      "sku": {
-        "name": "[toLower(parameters('resourceSizes').searchService.SkuName)]"
-      },
-      "properties": {
-        "replicaCount": "[parameters('resourceSizes').searchService.Replicas]",
-        "partitionCount": "[parameters('resourceSizes').searchService.Partitions]"
-      },
-      "tags": {
-        "provider": "[variables('sitecoreTags').provider]"
-      }
-    },
-    {
-      "type": "Microsoft.Cache/Redis",
-      "name": "[variables('redisCacheNameTidy')]",
-      "apiVersion": "[variables('redisApiVersion')]",
-      "location": "[parameters('location')]",
-      "properties": {
-        "sku": {
-          "name": "[parameters('resourceSizes').redisCache.SkuName]",
-          "family": "[parameters('resourceSizes').redisCache.SkuFamily]",
-          "capacity": "[parameters('resourceSizes').redisCache.SkuCapacity]"
-        },
-        "enableNonSslPort": false
-      },
-      "tags": {
-        "provider": "[variables('sitecoreTags').provider]"
-      }
     },
     {
       "type": "Microsoft.Insights/Components",
