@@ -5,8 +5,6 @@
     "webApiVersion": "2018-02-01",
     "serverFarmApiVersion": "2018-02-01",
     "dbApiVersion": "2014-04-01-preview",
-    "searchApiVersion": "2015-08-19",
-    "redisApiVersion": "2016-04-01",
     "appInsightsApiVersion": "2015-05-01",
     "certificateApiVersion": "2014-11-01",
 
@@ -167,30 +165,14 @@
       "defaultValue": "[concat(parameters('deploymentId'), '-exmmaster-db')]"
     },
 
-    "deployAzureSearch": {
-      "type": "bool",
-      "defaultValue": true
-    },
-    
-    "searchServiceName": {
-      "type": "string",
-      "defaultValue": "[concat(parameters('deploymentId'), '-as')]"
-    },
-    "searchServiceLocation": {
-      "type": "string",
-      "defaultValue": "[parameters('location')]"
-    },
+
     "searchServiceReplicaCount": {
       "type": "int",
       "defaultValue": 1
     },
 
-    "redisCacheName": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-redis')]"
-    },
-    "useDedicatedHostingPlanForReporting": { 
+
+    "useDedicatedHostingPlanForReporting": {
       "type": "bool",
       "defaultValue": false
     },
@@ -857,7 +839,7 @@
         "logicalName": "[variables('sitecoreTags').cm]"
       },
       "dependsOn": [ 
-        "[resourceId('Microsoft.Web/serverfarms', variables('siHostingPlanNameTidy'))]" 
+        "[resourceId('Microsoft.Web/serverfarms', variables('siHostingPlanNameTidy'))]"
       ]
     },
     {
@@ -986,7 +968,7 @@
       "name": "[variables('repWebAppNameTidy')]",
       "apiVersion": "[variables('webApiVersion')]",
       "properties": {
-        "serverFarmId": "[if(parameters('useDedicatedHostingPlanForReporting'), resourceId('Microsoft.Web/serverfarms', variables('siHostingPlanNameTidy')), resourceId('Microsoft.Web/serverfarms', variables('cmHostingPlanNameTidy')))]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('siHostingPlanNameTidy'))]",
         "siteConfig": {
           "use32BitWorkerProcess": false,
           "alwaysOn": true,
