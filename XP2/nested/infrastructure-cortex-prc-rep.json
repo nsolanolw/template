@@ -6,12 +6,13 @@
     "dbApiVersion": "2014-04-01-preview",
 
     "sqlServerNameTidy": "[toLower(trim(parameters('sqlServerName')))]",
-    "siHostingPlanNameTidy": "[toLower(trim(parameters('siHostingPlanName')))]",
+
     "processingEngineTasksSqlDatabaseNameTidy": "[toLower(trim(parameters('processingEngineTasksSqlDatabaseName')))]",
     "processingEngineStorageSqlDatabaseNameTidy": "[toLower(trim(parameters('processingEngineStorageSqlDatabaseName')))]",
     "reportingSqlDatabaseNameTidy": "[toLower(trim(parameters('reportingSqlDatabaseName')))]",
 
-
+    "xcBasicHostingPlanNameTidy": "[toLower(trim(parameters('xcBasicHostingPlanName')))]",
+    "xcResourceIntensiveHostingPlanNameTidy": "[toLower(trim(parameters('xcResourceIntensiveHostingPlanName')))]",
 
     "cortexProcessingWebAppNameTidy": "[toLower(trim(parameters('cortexProcessingWebAppName')))]",
     "cortexReportingWebAppNameTidy": "[toLower(trim(parameters('cortexReportingWebAppName')))]",
@@ -72,12 +73,17 @@
       "defaultValue": "[concat(parameters('deploymentId'), '-reporting-db')]"
     },
 
-
-    "siHostingPlanName": {
+    "xcBasicHostingPlanName": {
       "type": "string",
       "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-si-hp')]"
+      "defaultValue": "[concat(parameters('deploymentId'), '-xc-basic-hp')]"
     },
+    "xcResourceIntensiveHostingPlanName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "[concat(parameters('deploymentId'), '-xc-resourceintensive-hp')]"
+    },
+
     "cortexProcessingWebAppName": {
       "type": "string",
       "minLength": 1,
@@ -312,7 +318,7 @@
       "apiVersion": "[variables('webApiVersion')]",
       "properties": {
         "clientCertEnabled": true,
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('siHostingPlanNameTidy'))]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('xcResourceIntensiveHostingPlanNameTidy'))]",
         "siteConfig": {
           "use32BitWorkerProcess": false,
           "alwaysOn": true,
@@ -323,9 +329,6 @@
         }
       },
       "location": "[parameters('location')]",
-      "dependsOn": [
-        "[resourceId('Microsoft.Web/serverfarms', variables('siHostingPlanNameTidy'))]"
-      ],
       "tags": {
         "provider": "[variables('sitecoreTags').provider]",
         "logicalName": "[variables('sitecoreTags').cortexProcessing]"
@@ -337,7 +340,7 @@
       "apiVersion": "[variables('webApiVersion')]",
       "properties": {
         "clientCertEnabled": true,
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('siHostingPlanNameTidy'))]",
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('xcBasicHostingPlanNameTidy'))]",
         "siteConfig": {
           "use32BitWorkerProcess": false,
           "alwaysOn": true,
@@ -348,9 +351,6 @@
         }
       },
       "location": "[parameters('location')]",
-      "dependsOn": [
-        "[resourceId('Microsoft.Web/serverfarms', variables('siHostingPlanNameTidy'))]"
-      ],
       "tags": {
         "provider": "[variables('sitecoreTags').provider]",
         "logicalName": "[variables('sitecoreTags').cortexReporting]"
