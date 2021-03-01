@@ -159,6 +159,26 @@
       "minLength": 8,
       "defaultValue": "[concat(toUpper(uniqueString('web', parameters('passwordSalt'))), uniqueString('web', parameters('sqlServerPassword'), parameters('passwordSalt')), toUpper(uniqueString('web', parameters('sitecoreAdminPassword'), parameters('passwordSalt'))), '4@')]"
     },
+    "web2SqlDatabaseUserName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "web2user"
+    },
+    "web2SqlDatabasePassword": {
+      "type": "securestring",
+      "minLength": 8,
+      "defaultValue": "[concat(toUpper(uniqueString('web2', parameters('passwordSalt'))), uniqueString('web2', parameters('sqlServerPassword'), parameters('passwordSalt')), toUpper(uniqueString('web2', parameters('sitecoreAdminPassword'), parameters('passwordSalt'))), '4@')]"
+    },
+    "web3SqlDatabaseUserName": {
+      "type": "string",
+      "minLength": 1,
+      "defaultValue": "previewuser"
+    },
+    "web3SqlDatabasePassword": {
+      "type": "securestring",
+      "minLength": 8,
+      "defaultValue": "[concat(toUpper(uniqueString('preview', parameters('passwordSalt'))), uniqueString('preview', parameters('sqlServerPassword'), parameters('passwordSalt')), toUpper(uniqueString('preview', parameters('sitecoreAdminPassword'), parameters('passwordSalt'))), '4@')]"
+    },
     "formsSqlDatabaseUserName": {
       "type": "string",
       "minLength": 1,
