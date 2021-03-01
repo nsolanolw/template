@@ -5,7 +5,6 @@
     "webApiVersion": "2018-02-01",
     "searchApiVersion": "2015-08-19",
     "searchRestApiVersion": "2017-11-11",
-    "redisApiVersion": "2016-04-01",
     "appInsightsApiVersion": "2015-05-01",
 
     "sqlServerFqdnTidy": "[trim(toLower(parameters('sqlServerFqdn')))]",
@@ -47,7 +46,6 @@
     "searchProvider": "[if(empty(parameters('solrConnectionString')), 'Azure', 'Solr')]",
 
     "searchServiceNameTidy": "[toLower(trim(parameters('searchServiceName')))]",
-    "redisCacheNameTidy": "[toLower(trim(parameters('redisCacheName')))]",
 
     "azureServiceBusVersion": "2017-04-01",
     "azureServiceBusNamespaceNameTidy": "[toLower(trim(parameters('azureServiceBusNamespaceName')))]"
@@ -267,11 +265,6 @@
       "defaultValue": "[concat(toUpper(uniqueString('xcrefdata', parameters('passwordSalt'))), uniqueString('xcrefdata', parameters('sqlServerPassword'), parameters('passwordSalt')), toUpper(uniqueString('xcrefdata', parameters('sitecoreAdminPassword'), parameters('passwordSalt'))), '4@')]"
     },
 
-    "redisCacheName": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-redis')]"
-    },
 
     "searchServiceName": {
       "type": "string",
@@ -630,7 +623,6 @@
                 "XConnect Collection": "[concat('https://', reference(resourceId(subscription().subscriptionId, resourceGroup().name, 'Microsoft.Web/sites', variables('xcCollectWebAppNameTidy')), variables('webApiVersion')).hostNames[0])]",
                 "XDB Reference Data Client": "[concat('https://', reference(resourceId(subscription().subscriptionId, resourceGroup().name, 'Microsoft.Web/sites', variables('xcRefDataWebAppNameTidy')), variables('webApiVersion')).hostNames[0])]",
                 "XDB MA Ops Client": "[concat('https://', reference(resourceId(subscription().subscriptionId, resourceGroup().name, 'Microsoft.Web/sites', variables('maOpsWebAppNameTidy')), variables('webApiVersion')).hostNames[0])]",
-                "Redis Sessions": "[concat(reference(resourceId('Microsoft.Cache/Redis', variables('redisCacheNameTidy')), variables('redisApiVersion')).hostName, ':', reference(resourceId('Microsoft.Cache/Redis', variables('redisCacheNameTidy')), variables('redisApiVersion')).sslPort, ',password=', listKeys(resourceId('Microsoft.Cache/Redis', variables('redisCacheNameTidy')), variables('redisApiVersion')).primaryKey, ',ssl=True,abortConnect=False')]",
                 "Search Provider": "[variables('searchProvider')]",
                 "Cloud Search Connection String": "[if(equals(variables('searchProvider'), 'Azure'), concat('serviceUrl=https://', variables('searchServiceNameTidy'), '.search.windows.net;apiVersion=', variables('searchRestApiVersion'), ';apiKey=', listAdminKeys(resourceId('Microsoft.Search/searchServices', variables('searchServiceNameTidy')), variables('searchApiVersion')).primaryKey), '')]",
                 "SOLR Connection String": "[parameters('solrConnectionString')]",
@@ -675,7 +667,6 @@
                 "XConnect Collection": "[concat('https://', reference(resourceId(subscription().subscriptionId, resourceGroup().name, 'Microsoft.Web/sites', variables('xcCollectWebAppNameTidy')), variables('webApiVersion')).hostNames[0])]",
                 "XDB Reference Data Client": "[concat('https://', reference(resourceId(subscription().subscriptionId, resourceGroup().name, 'Microsoft.Web/sites', variables('xcRefDataWebAppNameTidy')), variables('webApiVersion')).hostNames[0])]",
                 "XDB MA Ops Client": "[concat('https://', reference(resourceId(subscription().subscriptionId, resourceGroup().name, 'Microsoft.Web/sites', variables('maOpsWebAppNameTidy')), variables('webApiVersion')).hostNames[0])]",
-                "Redis Sessions": "[concat(reference(resourceId('Microsoft.Cache/Redis', variables('redisCacheNameTidy')), variables('redisApiVersion')).hostName, ':', reference(resourceId('Microsoft.Cache/Redis', variables('redisCacheNameTidy')), variables('redisApiVersion')).sslPort, ',password=', listKeys(resourceId('Microsoft.Cache/Redis', variables('redisCacheNameTidy')), variables('redisApiVersion')).primaryKey, ',ssl=True,abortConnect=False')]",
                 "Search Provider": "[variables('searchProvider')]",
                 "Cloud Search Connection String": "[if(equals(variables('searchProvider'), 'Azure'), concat('serviceUrl=https://', variables('searchServiceNameTidy'), '.search.windows.net;apiVersion=', variables('searchRestApiVersion'), ';apiKey=', listAdminKeys(resourceId('Microsoft.Search/searchServices', variables('searchServiceNameTidy')), variables('searchApiVersion')).primaryKey), '')]",
                 "SOLR Connection String": "[parameters('solrConnectionString')]",
@@ -720,7 +711,6 @@
                 "XConnect Collection": "[concat('https://', reference(resourceId(subscription().subscriptionId, resourceGroup().name, 'Microsoft.Web/sites', variables('xcCollectWebAppNameTidy')), variables('webApiVersion')).hostNames[0])]",
                 "XDB Reference Data Client": "[concat('https://', reference(resourceId(subscription().subscriptionId, resourceGroup().name, 'Microsoft.Web/sites', variables('xcRefDataWebAppNameTidy')), variables('webApiVersion')).hostNames[0])]",
                 "XDB MA Ops Client": "[concat('https://', reference(resourceId(subscription().subscriptionId, resourceGroup().name, 'Microsoft.Web/sites', variables('maOpsWebAppNameTidy')), variables('webApiVersion')).hostNames[0])]",
-                "Redis Sessions": "[concat(reference(resourceId('Microsoft.Cache/Redis', variables('redisCacheNameTidy')), variables('redisApiVersion')).hostName, ':', reference(resourceId('Microsoft.Cache/Redis', variables('redisCacheNameTidy')), variables('redisApiVersion')).sslPort, ',password=', listKeys(resourceId('Microsoft.Cache/Redis', variables('redisCacheNameTidy')), variables('redisApiVersion')).primaryKey, ',ssl=True,abortConnect=False')]",
                 "Search Provider": "[variables('searchProvider')]",
                 "Cloud Search Connection String": "[if(equals(variables('searchProvider'), 'Azure'), concat('serviceUrl=https://', variables('searchServiceNameTidy'), '.search.windows.net;apiVersion=', variables('searchRestApiVersion'), ';apiKey=', listAdminKeys(resourceId('Microsoft.Search/searchServices', variables('searchServiceNameTidy')), variables('searchApiVersion')).primaryKey), '')]",
                 "SOLR Connection String": "[parameters('solrConnectionString')]",
