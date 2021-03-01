@@ -5,6 +5,8 @@
     "webApiVersion": "2018-02-01",
     "cmWebAppNameTidy": "[toLower(trim(parameters('cmWebAppName')))]",
     "cdWebAppNameTidy": "[toLower(trim(parameters('cdWebAppName')))]",
+    "cd2WebAppNameTidy": "[toLower(trim(parameters('cd2WebAppName')))]",
+    "cd3WebAppNameTidy": "[toLower(trim(parameters('cd3WebAppName')))]",
     "prcWebAppNameTidy": "[toLower(trim(parameters('prcWebAppName')))]",
     "repWebAppNameTidy": "[toLower(trim(parameters('repWebAppName')))]"
   },
@@ -16,6 +18,8 @@
         "location": null,
         "cmWebAppName": null,
         "cdWebAppName": null,
+        "cd2WebAppName": null,
+        "cd3WebAppName": null,
         "prcWebAppName": null,
         "repWebAppName": null        
       }
@@ -38,7 +42,15 @@
     },
     "cdWebAppName": {
       "type": "string",
-      "defaultValue": "[coalesce(parameters('standard').cdWebAppName, concat(parameters('deploymentId'), '-cd'))]"
+      "defaultValue": "[coalesce(parameters('standard').cdWebAppName, concat(parameters('deploymentId'), '-cd-01'))]"
+    },
+    "cd2WebAppName": {
+      "type": "string",
+      "defaultValue": "[coalesce(parameters('standard').cd2WebAppName, concat(parameters('deploymentId'), '-cd-02'))]"
+    },
+    "cd3WebAppName": {
+      "type": "string",
+      "defaultValue": "[coalesce(parameters('standard').cd3WebAppName, concat(parameters('deploymentId'), '-preview'))]"
     },
     "prcWebAppName": {
       "type": "string",
@@ -81,6 +93,38 @@
             "packageUri": "[parameters('msDeployPackageUrl')]",
             "setParameters": {
               "Application Path": "[variables('cdWebAppNameTidy')]"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "[concat(variables('cd2WebAppNameTidy'), '/', 'MSDeploy')]",
+      "type": "Microsoft.Web/sites/extensions",
+      "location": "[parameters('location')]",
+      "apiVersion": "[variables('webApiVersion')]",
+      "properties": {
+        "addOnPackages": [
+          {
+            "packageUri": "[parameters('msDeployPackageUrl')]",
+            "setParameters": {
+              "Application Path": "[variables('cd2WebAppNameTidy')]"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "[concat(variables('cd3WebAppNameTidy'), '/', 'MSDeploy')]",
+      "type": "Microsoft.Web/sites/extensions",
+      "location": "[parameters('location')]",
+      "apiVersion": "[variables('webApiVersion')]",
+      "properties": {
+        "addOnPackages": [
+          {
+            "packageUri": "[parameters('msDeployPackageUrl')]",
+            "setParameters": {
+              "Application Path": "[variables('cd3WebAppNameTidy')]"
             }
           }
         ]

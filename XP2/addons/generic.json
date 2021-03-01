@@ -12,6 +12,8 @@
     
     "cmWebAppNameTidy": "[trim(toLower(parameters('cmWebAppName')))]",
     "cdWebAppNameTidy": "[trim(toLower(parameters('cdWebAppName')))]",
+    "cd2WebAppNameTidy": "[trim(toLower(parameters('cd2WebAppName')))]",
+    "cd3WebAppNameTidy": "[trim(toLower(parameters('cd3WebAppName')))]",
     "prcWebAppNameTidy": "[trim(toLower(parameters('prcWebAppName')))]",
     "repWebAppNameTidy": "[trim(toLower(parameters('repWebAppName')))]"
   },
@@ -29,6 +31,8 @@
         "reportingSqlDatabaseName": null,
         "cmWebAppName": null,
         "cdWebAppName": null,
+        "cd2WebAppName": null,
+        "cd3WebAppName": null,
         "prcWebAppName": null,
         "repWebAppName": null        
       }
@@ -95,7 +99,15 @@
     },
     "cdWebAppName": {
       "type": "string",
-      "defaultValue": "[coalesce(parameters('standard').cdWebAppName, concat(parameters('deploymentId'), '-cd'))]"
+      "defaultValue": "[coalesce(parameters('standard').cdWebAppName, concat(parameters('deploymentId'), '-cd-01'))]"
+    },
+    "cd2WebAppName": {
+      "type": "string",
+      "defaultValue": "[coalesce(parameters('standard').cdWebAppName, concat(parameters('deploymentId'), '-cd-02'))]"
+    },
+    "cd3WebAppName": {
+      "type": "string",
+      "defaultValue": "[coalesce(parameters('standard').cdWebAppName, concat(parameters('deploymentId'), '-preview'))]"
     },
     "prcWebAppName": {
       "type": "string",
@@ -161,6 +173,42 @@
             "packageUri": "[parameters('cdMsDeployPackageUrl')]",
             "setParameters": {
               "Application Path": "[variables('cdWebAppNameTidy')]"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "[concat(variables('cd2WebAppNameTidy'), '/', 'MSDeploy')]",
+      "type": "Microsoft.Web/sites/extensions",
+      "location": "[parameters('location')]",
+      "apiVersion": "[variables('webApiVersion')]",
+      "properties": {
+        "addOnPackages": [
+          {
+            "dbType": "SQL",
+            "connectionString": "[concat('Data Source=tcp:', variables('sqlServerFqdnTidy'), ',1433;Initial Catalog=master;User Id=', parameters('sqlServerLogin'), ';Password=', parameters('sqlServerPassword'), ';')]",
+            "packageUri": "[parameters('cdMsDeployPackageUrl')]",
+            "setParameters": {
+              "Application Path": "[variables('cd2WebAppNameTidy')]"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "[concat(variables('cd3WebAppNameTidy'), '/', 'MSDeploy')]",
+      "type": "Microsoft.Web/sites/extensions",
+      "location": "[parameters('location')]",
+      "apiVersion": "[variables('webApiVersion')]",
+      "properties": {
+        "addOnPackages": [
+          {
+            "dbType": "SQL",
+            "connectionString": "[concat('Data Source=tcp:', variables('sqlServerFqdnTidy'), ',1433;Initial Catalog=master;User Id=', parameters('sqlServerLogin'), ';Password=', parameters('sqlServerPassword'), ';')]",
+            "packageUri": "[parameters('cdMsDeployPackageUrl')]",
+            "setParameters": {
+              "Application Path": "[variables('cd3WebAppNameTidy')]"
             }
           }
         ]
