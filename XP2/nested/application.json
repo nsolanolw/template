@@ -796,6 +796,20 @@
       ]
     },
     {
+      "name": "[concat(variables('cmWebAppNameTidy'), '/', 'appsettings')]",
+      "type": "Microsoft.Web/sites/config",
+      "apiVersion": "[variables('webApiVersion')]",
+      "properties": {
+        "WEBSITE_LOAD_CERTIFICATES": "[parameters('authCertificateThumbprint')]",
+        "WEBSITE_DYNAMIC_CACHE": 0,
+        "WEBSITE_NODE_DEFAULT_VERSION":"[parameters('cmNodeJsVersion')]",
+        "SITECORE_ENVIRONMENT_TYPE": "[parameters('environmentType')]"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites/extensions', variables('siWebAppNameTidy'),'MSDeploy')]"
+      ]
+    },
+    {
       "name": "[concat(variables('cdWebAppNameTidy'), '/', 'appsettings')]",
       "type": "Microsoft.Web/sites/config",
       "apiVersion": "[variables('webApiVersion')]",
@@ -835,20 +849,6 @@
       },
       "dependsOn": [
         "[resourceId('Microsoft.Web/sites/extensions', variables('cd2WebAppNameTidy'),'MSDeploy')]"
-      ]
-    },
-    {
-      "name": "[concat(variables('cmWebAppNameTidy'), '/', 'appsettings')]",
-      "type": "Microsoft.Web/sites/config",
-      "apiVersion": "[variables('webApiVersion')]",
-      "properties": {
-        "WEBSITE_LOAD_CERTIFICATES": "[parameters('authCertificateThumbprint')]",
-        "WEBSITE_DYNAMIC_CACHE": 0,
-        "WEBSITE_NODE_DEFAULT_VERSION":"[parameters('cmNodeJsVersion')]",
-        "SITECORE_ENVIRONMENT_TYPE": "[parameters('environmentType')]"
-      },
-      "dependsOn": [
-        "[resourceId('Microsoft.Web/sites/extensions', variables('siWebAppNameTidy'),'MSDeploy')]"
       ]
     },
     {
