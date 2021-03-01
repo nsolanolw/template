@@ -124,6 +124,26 @@
             "minLength": 1,
             "defaultValue": "[concat(parameters('deploymentId'), '-web-db')]"
         },
+        "web2SqlDatabaseName": {
+            "type": "string",
+            "minLength": 1,
+            "defaultValue": "[concat(parameters('deploymentId'), '-web2-db')]"
+        },
+        "web3SqlDatabaseName": {
+            "type": "string",
+            "minLength": 1,
+            "defaultValue": "[concat(parameters('deploymentId'), '-preview-db')]"
+        },
+        "web2SqlDatabaseName": {
+            "type": "string",
+            "minLength": 1,
+            "defaultValue": "[concat(parameters('deploymentId'), '-web2-db')]"
+        },
+        "web3SqlDatabaseName": {
+            "type": "string",
+            "minLength": 1,
+            "defaultValue": "[concat(parameters('deploymentId'), '-preview-db')]"
+        },
         "reportingSqlDatabaseName": {
             "type": "string",
             "minLength": 1,
@@ -766,6 +786,12 @@
                     "webSqlDatabaseName": {
                         "value": "[parameters('webSqlDatabaseName')]"
                     },
+                    "web2SqlDatabaseName": {
+                        "value": "[parameters('web2SqlDatabaseName')]"
+                    },
+                    "web3SqlDatabaseName": {
+                        "value": "[parameters('web3SqlDatabaseName')]"
+                    },
                     "poolsSqlDatabaseName": {
                         "value": "[parameters('poolsSqlDatabaseName')]"
                     },
@@ -1136,6 +1162,12 @@
                     },
                     "webSqlDatabaseName": {
                         "value": "[parameters('webSqlDatabaseName')]"
+                    },
+                    "web2SqlDatabaseName": {
+                        "value": "[parameters('web2SqlDatabaseName')]"
+                    },
+                    "web3SqlDatabaseName": {
+                        "value": "[parameters('web3SqlDatabaseName')]"
                     },
                     "reportingSqlDatabaseName": {
                         "value": "[parameters('reportingSqlDatabaseName')]"
@@ -1762,6 +1794,12 @@
                     "webSqlDatabaseName": {
                         "value": "[parameters('webSqlDatabaseName')]"
                     },
+                    "web2SqlDatabaseName": {
+                        "value": "[parameters('web2SqlDatabaseName')]"
+                    },
+                    "web3SqlDatabaseName": {
+                        "value": "[parameters('web3SqlDatabaseName')]"
+                    },
                     "refDataSqlDatabaseName": {
                         "value": "[parameters('refDataSqlDatabaseName')]"
                     },
@@ -1933,6 +1971,8 @@
                             "securitySqlDatabaseName": "[parameters('securitySqlDatabaseName')]",
                             "masterSqlDatabaseName": "[parameters('masterSqlDatabaseName')]",
                             "webSqlDatabaseName": "[parameters('webSqlDatabaseName')]",
+                            "web2SqlDatabaseName": "[parameters('web2SqlDatabaseName')]",
+                            "web3SqlDatabaseName": "[parameters('web3SqlDatabaseName')]",
                             "reportingSqlDatabaseName": "[parameters('reportingSqlDatabaseName')]",
                             "poolsSqlDatabaseName": "[parameters('poolsSqlDatabaseName')]",
                             "tasksSqlDatabaseName": "[parameters('tasksSqlDatabaseName')]",
