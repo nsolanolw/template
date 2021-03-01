@@ -1977,6 +1977,8 @@
                             "storeSitecoreCountersInApplicationInsights": "[parameters('storeSitecoreCountersInApplicationInsights')]",
                             "cmHostingPlanName": "[parameters('cmHostingPlanName')]",
                             "cdHostingPlanName": "[parameters('cdHostingPlanName')]",
+                            "prcHostingPlanName": "[parameters('siHostingPlanName')]",
+                            "repHostingPlanName": "[parameters('siHostingPlanName')]",							
                             "xcBasicHostingPlanName": "[parameters('xcBasicHostingPlanName')]",
                             "xcResourceIntensiveHostingPlanName": "[parameters('xcResourceIntensiveHostingPlanName')]",
                             "cmWebAppName": "[parameters('cmWebAppName')]",
