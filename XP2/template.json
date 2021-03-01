@@ -134,16 +134,6 @@
             "minLength": 1,
             "defaultValue": "[concat(parameters('deploymentId'), '-preview-db')]"
         },
-        "web2SqlDatabaseName": {
-            "type": "string",
-            "minLength": 1,
-            "defaultValue": "[concat(parameters('deploymentId'), '-web2-db')]"
-        },
-        "web3SqlDatabaseName": {
-            "type": "string",
-            "minLength": 1,
-            "defaultValue": "[concat(parameters('deploymentId'), '-preview-db')]"
-        },
         "reportingSqlDatabaseName": {
             "type": "string",
             "minLength": 1,
@@ -2047,6 +2037,7 @@
                             "cdWebAppName": "[parameters('cdWebAppName')]",
                             "cd2WebAppName": "[parameters('cd2WebAppName')]",
                             "cd3WebAppName": "[parameters('cd3WebAppName')]",
+                            "siWebAppName": "[parameters('siWebAppName')]",
                             "prcWebAppName": "[parameters('prcWebAppName')]",
                             "repWebAppName": "[parameters('repWebAppName')]",
                             "xcRefDataWebAppName": "[parameters('xcRefDataWebAppName')]",
