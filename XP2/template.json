@@ -124,16 +124,6 @@
             "minLength": 1,
             "defaultValue": "[concat(parameters('deploymentId'), '-web-db')]"
         },
-        "web2SqlDatabaseName": {
-            "type": "string",
-            "minLength": 1,
-            "defaultValue": "[concat(parameters('deploymentId'), '-web2-db')]"
-        },
-        "web3SqlDatabaseName": {
-            "type": "string",
-            "minLength": 1,
-            "defaultValue": "[concat(parameters('deploymentId'), '-preview-db')]"
-        },
         "reportingSqlDatabaseName": {
             "type": "string",
             "minLength": 1,
@@ -233,6 +223,26 @@
             "type": "securestring",
             "minLength": 8,
             "defaultValue": "[concat(toUpper(uniqueString('web', parameters('passwordSalt'))), uniqueString('web', parameters('sqlServerPassword'), parameters('passwordSalt')), toUpper(uniqueString('web', parameters('sitecoreAdminPassword'), parameters('passwordSalt'))), '4@')]"
+        },
+        "web2SqlDatabaseUserName": {
+            "type": "string",
+            "minLength": 1,
+            "defaultValue": "web2user"
+        },
+       "web2SqlDatabasePassword": {
+            "type": "securestring",
+            "minLength": 8,
+            "defaultValue": "[concat(toUpper(uniqueString('web2', parameters('passwordSalt'))), uniqueString('web2', parameters('sqlServerPassword'), parameters('passwordSalt')), toUpper(uniqueString('web2', parameters('sitecoreAdminPassword'), parameters('passwordSalt'))), '4@')]"
+        },
+        "web3SqlDatabaseUserName": {
+            "type": "string",
+            "minLength": 1,
+            "defaultValue": "previewuser"
+        },
+       "web3SqlDatabasePassword": {
+            "type": "securestring",
+            "minLength": 8,
+            "defaultValue": "[concat(toUpper(uniqueString('preview', parameters('passwordSalt'))), uniqueString('preview', parameters('sqlServerPassword'), parameters('passwordSalt')), toUpper(uniqueString('preview', parameters('sitecoreAdminPassword'), parameters('passwordSalt'))), '4@')]"
         },
         "formsSqlDatabaseUserName": {
             "type": "string",
@@ -796,12 +806,6 @@
                     "webSqlDatabaseName": {
                         "value": "[parameters('webSqlDatabaseName')]"
                     },
-                    "web2SqlDatabaseName": {
-                        "value": "[parameters('web2SqlDatabaseName')]"
-                    },
-                    "web3SqlDatabaseName": {
-                        "value": "[parameters('web3SqlDatabaseName')]"
-                    },
                     "poolsSqlDatabaseName": {
                         "value": "[parameters('poolsSqlDatabaseName')]"
                     },
@@ -1185,12 +1189,6 @@
                     "webSqlDatabaseName": {
                         "value": "[parameters('webSqlDatabaseName')]"
                     },
-                    "web2SqlDatabaseName": {
-                        "value": "[parameters('web2SqlDatabaseName')]"
-                    },
-                    "web3SqlDatabaseName": {
-                        "value": "[parameters('web3SqlDatabaseName')]"
-                    },
                     "reportingSqlDatabaseName": {
                         "value": "[parameters('reportingSqlDatabaseName')]"
                     },
@@ -1232,6 +1230,18 @@
                     },
                     "webSqlDatabasePassword": {
                         "value": "[parameters('webSqlDatabasePassword')]"
+                    },
+                    "web2SqlDatabaseUserName": {
+                        "value": "[parameters('web2SqlDatabaseUserName')]"
+                    },
+                    "web2SqlDatabasePassword": {
+                        "value": "[parameters('web2SqlDatabasePassword')]"
+                    },
+                    "web3SqlDatabaseUserName": {
+                        "value": "[parameters('web3SqlDatabaseUserName')]"
+                    },
+                    "web3SqlDatabasePassword": {
+                        "value": "[parameters('web3SqlDatabasePassword')]"
                     },
                     "formsSqlDatabaseUserName": {
                         "value": "[parameters('formsSqlDatabaseUserName')]"
@@ -1822,12 +1832,6 @@
                     "webSqlDatabaseName": {
                         "value": "[parameters('webSqlDatabaseName')]"
                     },
-                    "web2SqlDatabaseName": {
-                        "value": "[parameters('web2SqlDatabaseName')]"
-                    },
-                    "web3SqlDatabaseName": {
-                        "value": "[parameters('web3SqlDatabaseName')]"
-                    },
                     "refDataSqlDatabaseName": {
                         "value": "[parameters('refDataSqlDatabaseName')]"
                     },
@@ -1856,6 +1860,18 @@
                         "value": "[parameters('webSqlDatabaseUserName')]"
                     },
                     "webSqlDatabasePassword": {
+                        "value": "[parameters('webSqlDatabasePassword')]"
+                    },
+                    "web2SqlDatabaseUserName": {
+                        "value": "[parameters('web3SqlDatabaseUserName')]"
+                    },
+                    "web2SqlDatabasePassword": {
+                        "value": "[parameters('webSqlDatabasePassword')]"
+                    },
+                    "web3SqlDatabaseUserName": {
+                        "value": "[parameters('web2SqlDatabaseUserName')]"
+                    },
+                    "web3SqlDatabasePassword": {
                         "value": "[parameters('webSqlDatabasePassword')]"
                     },
                     "formsSqlDatabaseUserName": {
@@ -1999,8 +2015,6 @@
                             "securitySqlDatabaseName": "[parameters('securitySqlDatabaseName')]",
                             "masterSqlDatabaseName": "[parameters('masterSqlDatabaseName')]",
                             "webSqlDatabaseName": "[parameters('webSqlDatabaseName')]",
-                            "web2SqlDatabaseName": "[parameters('web2SqlDatabaseName')]",
-                            "web3SqlDatabaseName": "[parameters('web3SqlDatabaseName')]",
                             "reportingSqlDatabaseName": "[parameters('reportingSqlDatabaseName')]",
                             "poolsSqlDatabaseName": "[parameters('poolsSqlDatabaseName')]",
                             "tasksSqlDatabaseName": "[parameters('tasksSqlDatabaseName')]",
@@ -2019,6 +2033,10 @@
                             "masterSqlDatabasePassword": "[parameters('masterSqlDatabasePassword')]",
                             "webSqlDatabaseUserName": "[parameters('webSqlDatabaseUserName')]",
                             "webSqlDatabasePassword": "[parameters('webSqlDatabasePassword')]",
+                            "web2SqlDatabaseUserName": "[parameters('web2SqlDatabaseUserName')]",
+                            "web2SqlDatabasePassword": "[parameters('web2SqlDatabasePassword')]",
+                            "web3SqlDatabaseUserName": "[parameters('web3SqlDatabaseUserName')]",
+                            "web3SqlDatabasePassword": "[parameters('web3SqlDatabasePassword')]",
                             "reportingSqlDatabaseUserName": "[parameters('reportingSqlDatabaseUserName')]",
                             "reportingSqlDatabasePassword": "[parameters('reportingSqlDatabasePassword')]",
                             "poolsSqlDatabaseUserName": "[parameters('poolsSqlDatabaseUserName')]",
@@ -2046,14 +2064,13 @@
                             "cmHostingPlanName": "[parameters('cmHostingPlanName')]",
                             "cdHostingPlanName": "[parameters('cdHostingPlanName')]",
                             "prcHostingPlanName": "[parameters('prcHostingPlanName')]",
-                            "repHostingPlanName": "[parameters('repHostingPlanName')]",							
+                            "repHostingPlanName": "[parameters('repHostingPlanName')]",
                             "xcBasicHostingPlanName": "[parameters('xcBasicHostingPlanName')]",
                             "xcResourceIntensiveHostingPlanName": "[parameters('xcResourceIntensiveHostingPlanName')]",
                             "cmWebAppName": "[parameters('cmWebAppName')]",
                             "cdWebAppName": "[parameters('cdWebAppName')]",
                             "cd2WebAppName": "[parameters('cd2WebAppName')]",
                             "cd3WebAppName": "[parameters('cd3WebAppName')]",
-                            "siWebAppName": "[parameters('siWebAppName')]",
                             "prcWebAppName": "[parameters('prcWebAppName')]",
                             "repWebAppName": "[parameters('repWebAppName')]",
                             "xcRefDataWebAppName": "[parameters('xcRefDataWebAppName')]",
