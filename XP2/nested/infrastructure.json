@@ -6,7 +6,6 @@
     "serverFarmApiVersion": "2018-02-01",
     "dbApiVersion": "2014-04-01-preview",
     "searchApiVersion": "2015-08-19",
-
     "appInsightsApiVersion": "2015-05-01",
     "certificateApiVersion": "2014-11-01",
 
@@ -14,8 +13,6 @@
 
     "coreSqlDatabaseNameTidy": "[toLower(trim(parameters('coreSqlDatabaseName')))]",
     "webSqlDatabaseNameTidy": "[toLower(trim(parameters('webSqlDatabaseName')))]",
-    "web2SqlDatabaseNameTidy": "[toLower(trim(parameters('web2SqlDatabaseName')))]",
-    "web3SqlDatabaseNameTidy": "[toLower(trim(parameters('web3SqlDatabaseName')))]",
     "masterSqlDatabaseNameTidy": "[toLower(trim(parameters('masterSqlDatabaseName')))]",
     "poolsSqlDatabaseNameTidy": "[toLower(trim(parameters('poolsSqlDatabaseName')))]",
     "tasksSqlDatabaseNameTidy": "[toLower(trim(parameters('tasksSqlDatabaseName')))]",
@@ -31,8 +28,6 @@
     "siWebAppNameTidy": "[toLower(trim(parameters('siWebAppName')))]",
     "cmWebAppNameTidy": "[toLower(trim(parameters('cmWebAppName')))]",
     "cdWebAppNameTidy": "[toLower(trim(parameters('cdWebAppName')))]",
-    "cd3WebAppNameTidy": "[toLower(trim(parameters('cd3WebAppName')))]",
-    "cd2WebAppNameTidy": "[toLower(trim(parameters('cd2WebAppName')))]",
     "prcWebAppNameTidy": "[toLower(trim(parameters('prcWebAppName')))]",
     "repWebAppNameTidy": "[toLower(trim(parameters('repWebAppName')))]",
 
@@ -169,16 +164,6 @@
       "minLength": 1,
       "defaultValue": "[concat(parameters('deploymentId'), '-web-db')]"
     },
-    "web2SqlDatabaseName": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-web2-db')]"
-    },
-    "web3SqlDatabaseName": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-preview-db')]"
-    },
     "poolsSqlDatabaseName": {
       "type": "string",
       "minLength": 1,
@@ -204,7 +189,7 @@
       "type": "bool",
       "defaultValue": true
     },
-
+    
     "searchServiceName": {
       "type": "string",
       "defaultValue": "[concat(parameters('deploymentId'), '-as')]"
@@ -218,7 +203,7 @@
       "defaultValue": 1
     },
 
-    "useDedicatedHostingPlanForReporting": {
+    "useDedicatedHostingPlanForReporting": { 
       "type": "bool",
       "defaultValue": false
     },
@@ -280,17 +265,7 @@
     "cdWebAppName": {
       "type": "string",
       "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-cd-01')]"
-    },
-    "cd2WebAppName": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-cd-02')]"
-    },
-    "cd3WebAppName": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-preview')]"
+      "defaultValue": "[concat(parameters('deploymentId'), '-cd')]"
     },
     "prcWebAppName": {
       "type": "string",
@@ -488,6 +463,7 @@
             "Partitions": 1,
             "Replicas": "[parameters('searchServiceReplicaCount')]"
           },
+
           "applicationInsightsPricePlan": {
             "CurrentBillingFeatures": "Basic",
             "DataVolumeCap": {
@@ -753,6 +729,7 @@
             "Partitions": 3,
             "Replicas": "[parameters('searchServiceReplicaCount')]"
           },
+
           "applicationInsightsPricePlan": {
             "CurrentBillingFeatures": "Application Insights Enterprise",
             "DataVolumeCap": {
@@ -841,6 +818,7 @@
             "Partitions": 3,
             "Replicas": "[parameters('searchServiceReplicaCount')]"
           },
+
           "applicationInsightsPricePlan": {
             "CurrentBillingFeatures": "Application Insights Enterprise",
             "DataVolumeCap": {
@@ -929,6 +907,7 @@
             "Partitions": 4,
             "Replicas": "[parameters('searchServiceReplicaCount')]"
           },
+
           "applicationInsightsPricePlan": {
             "CurrentBillingFeatures": "Application Insights Enterprise",
             "DataVolumeCap": {
@@ -1120,54 +1099,6 @@
     },
     {
       "type": "Microsoft.Web/sites",
-      "name": "[variables('cd2WebAppNameTidy')]",
-      "apiVersion": "[variables('webApiVersion')]",
-      "properties": {
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('cdHostingPlanNameTidy'))]",
-        "siteConfig": {
-          "use32BitWorkerProcess": false,
-          "alwaysOn": true,
-          "phpVersion": "",
-          "defaultDocuments": [
-            "index.html"
-          ]
-        }
-      },
-      "location": "[parameters('location')]",
-      "dependsOn": [
-        "[resourceId('Microsoft.Web/serverfarms', variables('cdHostingPlanNameTidy'))]"
-      ],
-      "tags": {
-        "provider": "[variables('sitecoreTags').provider]",
-        "logicalName": "[variables('sitecoreTags').cd]"
-      }
-    },
-    {
-      "type": "Microsoft.Web/sites",
-      "name": "[variables('cd3WebAppNameTidy')]",
-      "apiVersion": "[variables('webApiVersion')]",
-      "properties": {
-        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('cdHostingPlanNameTidy'))]",
-        "siteConfig": {
-          "use32BitWorkerProcess": false,
-          "alwaysOn": true,
-          "phpVersion": "",
-          "defaultDocuments": [
-            "index.html"
-          ]
-        }
-      },
-      "location": "[parameters('location')]",
-      "dependsOn": [
-        "[resourceId('Microsoft.Web/serverfarms', variables('cdHostingPlanNameTidy'))]"
-      ],
-      "tags": {
-        "provider": "[variables('sitecoreTags').provider]",
-        "logicalName": "[variables('sitecoreTags').cd]"
-      }
-    },
-    {
-      "type": "Microsoft.Web/sites",
       "name": "[variables('prcWebAppNameTidy')]",
       "apiVersion": "[variables('webApiVersion')]",
       "properties": {
@@ -1321,66 +1252,6 @@
             }
           ],
           "name": "[variables('webSqlDatabaseNameTidy')]",
-          "location": "[parameters('location')]",
-          "dependsOn": [ "[resourceId('Microsoft.Sql/servers', variables('sqlServerNameTidy'))]" ],
-          "tags": {
-            "provider": "[variables('sitecoreTags').provider]",
-            "logicalName": "[variables('sitecoreTags').web]"
-          }
-        },
-		    {
-          "type": "databases",
-          "apiVersion": "[variables('dbApiVersion')]",
-          "properties": {
-            "edition": "[parameters('resourceSizes').webSqlDatabase.Edition]",
-            "collation": "[parameters('sqlDatabaseCollation')]",
-            "maxSizeBytes": "[parameters('resourceSizes').webSqlDatabase.MaxSize]",
-            "requestedServiceObjectiveName": "[parameters('resourceSizes').webSqlDatabase.ServiceObjectiveLevel]"
-          },
-          "resources": [
-            {
-              "name": "current",
-              "type": "transparentDataEncryption",
-              "dependsOn": [
-                "[variables('web2SqlDatabaseNameTidy')]"
-              ],
-              "apiVersion": "2014-04-01",
-              "properties": {
-                "status": "Enabled"
-              }
-            }
-          ],
-          "name": "[variables('web2SqlDatabaseNameTidy')]",
-          "location": "[parameters('location')]",
-          "dependsOn": [ "[resourceId('Microsoft.Sql/servers', variables('sqlServerNameTidy'))]" ],
-          "tags": {
-            "provider": "[variables('sitecoreTags').provider]",
-            "logicalName": "[variables('sitecoreTags').web]"
-          }
-        },
-		    {
-          "type": "databases",
-          "apiVersion": "[variables('dbApiVersion')]",
-          "properties": {
-            "edition": "[parameters('resourceSizes').webSqlDatabase.Edition]",
-            "collation": "[parameters('sqlDatabaseCollation')]",
-            "maxSizeBytes": "[parameters('resourceSizes').webSqlDatabase.MaxSize]",
-            "requestedServiceObjectiveName": "[parameters('resourceSizes').webSqlDatabase.ServiceObjectiveLevel]"
-          },
-          "resources": [
-            {
-              "name": "current",
-              "type": "transparentDataEncryption",
-              "dependsOn": [
-                "[variables('web3SqlDatabaseNameTidy')]"
-              ],
-              "apiVersion": "2014-04-01",
-              "properties": {
-                "status": "Enabled"
-              }
-            }
-          ],
-          "name": "[variables('web3SqlDatabaseNameTidy')]",
           "location": "[parameters('location')]",
           "dependsOn": [ "[resourceId('Microsoft.Sql/servers', variables('sqlServerNameTidy'))]" ],
           "tags": {
