@@ -1159,7 +1159,7 @@
       },
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[resourceId('Microsoft.Web/serverfarms', variables('cdHostingPlanNameTidy'))]"
+        "[resourceId('Microsoft.Web/serverfarms', variables('cmHostingPlanNameTidy'))]"
       ],
       "tags": {
         "provider": "[variables('sitecoreTags').provider]",
