@@ -1863,16 +1863,16 @@
                         "value": "[parameters('webSqlDatabasePassword')]"
                     },
                     "web2SqlDatabaseUserName": {
-                        "value": "[parameters('web3SqlDatabaseUserName')]"
-                    },
-                    "web2SqlDatabasePassword": {
-                        "value": "[parameters('webSqlDatabasePassword')]"
-                    },
-                    "web3SqlDatabaseUserName": {
                         "value": "[parameters('web2SqlDatabaseUserName')]"
                     },
+                    "web2SqlDatabasePassword": {
+                        "value": "[parameters('web2SqlDatabasePassword')]"
+                    },
+                    "web3SqlDatabaseUserName": {
+                        "value": "[parameters('web3SqlDatabaseUserName')]"
+                    },
                     "web3SqlDatabasePassword": {
-                        "value": "[parameters('webSqlDatabasePassword')]"
+                        "value": "[parameters('web3SqlDatabasePassword')]"
                     },
                     "formsSqlDatabaseUserName": {
                         "value": "[parameters('formsSqlDatabaseUserName')]"
