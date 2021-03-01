@@ -2053,6 +2053,7 @@
                             "cdWebAppName": "[parameters('cdWebAppName')]",
                             "cd2WebAppName": "[parameters('cd2WebAppName')]",
                             "cd3WebAppName": "[parameters('cd3WebAppName')]",
+                            "siWebAppName": "[parameters('siWebAppName')]",
                             "prcWebAppName": "[parameters('prcWebAppName')]",
                             "repWebAppName": "[parameters('repWebAppName')]",
                             "xcRefDataWebAppName": "[parameters('xcRefDataWebAppName')]",
