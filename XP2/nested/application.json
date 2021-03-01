@@ -12,8 +12,6 @@
     "coreSqlDatabaseNameTidy": "[toLower(trim(parameters('coreSqlDatabaseName')))]",
     "securitySqlDatabaseNameTidy": "[toLower(trim(parameters('securitySqlDatabaseName')))]",
     "webSqlDatabaseNameTidy": "[toLower(trim(parameters('webSqlDatabaseName')))]",
-    "web2SqlDatabaseNameTidy": "[toLower(trim(parameters('web2SqlDatabaseName')))]",
-    "web3SqlDatabaseNameTidy": "[toLower(trim(parameters('web3SqlDatabaseName')))]",
     "masterSqlDatabaseNameTidy": "[toLower(trim(parameters('masterSqlDatabaseName')))]",
     "reportingSqlDatabaseNameTidy": "[toLower(trim(parameters('reportingSqlDatabaseName')))]",
     "poolsSqlDatabaseNameTidy": "[toLower(trim(parameters('poolsSqlDatabaseName')))]",
@@ -123,16 +121,6 @@
       "minLength": 1,
       "defaultValue": "[concat(parameters('deploymentId'), '-web-db')]"
     },
-    "web2SqlDatabaseName": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-web2-db')]"
-    },
-    "web3SqlDatabaseName": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "[concat(parameters('deploymentId'), '-preview-db')]"
-    },
     "reportingSqlDatabaseName": {
       "type": "string",
       "minLength": 1,
@@ -200,26 +188,6 @@
       "defaultValue": "webuser"
     },
     "webSqlDatabasePassword": {
-      "type": "securestring",
-      "minLength": 8,
-      "defaultValue": "[concat(toUpper(uniqueString('web', parameters('passwordSalt'))), uniqueString('web', parameters('sqlServerPassword'), parameters('passwordSalt')), toUpper(uniqueString('web', parameters('sitecoreAdminPassword'), parameters('passwordSalt'))), '4@')]"
-    },
-    "web2SqlDatabaseUserName": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "webuser"
-    },
-    "web2SqlDatabasePassword": {
-      "type": "securestring",
-      "minLength": 8,
-      "defaultValue": "[concat(toUpper(uniqueString('web', parameters('passwordSalt'))), uniqueString('web', parameters('sqlServerPassword'), parameters('passwordSalt')), toUpper(uniqueString('web', parameters('sitecoreAdminPassword'), parameters('passwordSalt'))), '4@')]"
-    },
-    "web3SqlDatabaseUserName": {
-      "type": "string",
-      "minLength": 1,
-      "defaultValue": "webuser"
-    },
-    "web3SqlDatabasePassword": {
       "type": "securestring",
       "minLength": 8,
       "defaultValue": "[concat(toUpper(uniqueString('web', parameters('passwordSalt'))), uniqueString('web', parameters('sqlServerPassword'), parameters('passwordSalt')), toUpper(uniqueString('web', parameters('sitecoreAdminPassword'), parameters('passwordSalt'))), '4@')]"
@@ -679,7 +647,7 @@
             "setParameters": {
                 "Application Path": "[variables('cd2WebAppNameTidy')]",
                 "Security Connection String": "[concat('Encrypt=True;TrustServerCertificate=False;Data Source=', variables('sqlServerFqdnTidy'), ',1433;Initial Catalog=',variables('securitySqlDatabaseNameTidy'),';User Id=', parameters('securitySqlDatabaseUserName'), ';Password=', parameters('securitySqlDatabasePassword'), ';')]",
-                "Web Connection String": "[concat('Encrypt=True;TrustServerCertificate=False;Data Source=', variables('sqlServerFqdnTidy'), ',1433;Initial Catalog=',variables('web2SqlDatabaseNameTidy'),';User Id=', parameters('web2SqlDatabaseUserName'), ';Password=', parameters('web2SqlDatabasePassword'), ';')]",
+                "Web Connection String": "[concat('Encrypt=True;TrustServerCertificate=False;Data Source=', variables('sqlServerFqdnTidy'), ',1433;Initial Catalog=',variables('webSqlDatabaseNameTidy'),';User Id=', parameters('webSqlDatabaseUserName'), ';Password=', parameters('webSqlDatabasePassword'), ';')]",
                 "Reference Data Connection String": "[concat('Encrypt=True;TrustServerCertificate=False;Data Source=', variables('sqlServerFqdnTidy'), ',1433;Initial Catalog=',variables('refDataSqlDatabaseNameTidy'),';User Id=', parameters('xcRefDataSqlDatabaseUserName'), ';Password=', parameters('xcRefDataSqlDatabasePassword'), ';')]",
                 "Experience Forms Connection String": "[concat('Encrypt=True;TrustServerCertificate=False;Data Source=', variables('sqlServerFqdnTidy'), ',1433;Initial Catalog=',variables('formsSqlDatabaseNameTidy'),';User Id=', parameters('formsSqlDatabaseUserName'), ';Password=', parameters('formsSqlDatabasePassword'), ';')]",
                 "EXM Master Connection String": "[concat('Encrypt=True;TrustServerCertificate=False;Data Source=', variables('sqlServerFqdnTidy'), ',1433;Initial Catalog=',variables('exmMasterSqlDatabaseNameTidy'),';User Id=', parameters('exmMasterSqlDatabaseUserName'), ';Password=', parameters('exmMasterSqlDatabasePassword'), ';')]",
@@ -723,7 +691,7 @@
             "setParameters": {
                 "Application Path": "[variables('cd3WebAppNameTidy')]",
                 "Security Connection String": "[concat('Encrypt=True;TrustServerCertificate=False;Data Source=', variables('sqlServerFqdnTidy'), ',1433;Initial Catalog=',variables('securitySqlDatabaseNameTidy'),';User Id=', parameters('securitySqlDatabaseUserName'), ';Password=', parameters('securitySqlDatabasePassword'), ';')]",
-                "Web Connection String": "[concat('Encrypt=True;TrustServerCertificate=False;Data Source=', variables('sqlServerFqdnTidy'), ',1433;Initial Catalog=',variables('web3SqlDatabaseNameTidy'),';User Id=', parameters('web3SqlDatabaseUserName'), ';Password=', parameters('web3SqlDatabasePassword'), ';')]",
+                "Web Connection String": "[concat('Encrypt=True;TrustServerCertificate=False;Data Source=', variables('sqlServerFqdnTidy'), ',1433;Initial Catalog=',variables('webSqlDatabaseNameTidy'),';User Id=', parameters('webSqlDatabaseUserName'), ';Password=', parameters('webSqlDatabasePassword'), ';')]",
                 "Reference Data Connection String": "[concat('Encrypt=True;TrustServerCertificate=False;Data Source=', variables('sqlServerFqdnTidy'), ',1433;Initial Catalog=',variables('refDataSqlDatabaseNameTidy'),';User Id=', parameters('xcRefDataSqlDatabaseUserName'), ';Password=', parameters('xcRefDataSqlDatabasePassword'), ';')]",
                 "Experience Forms Connection String": "[concat('Encrypt=True;TrustServerCertificate=False;Data Source=', variables('sqlServerFqdnTidy'), ',1433;Initial Catalog=',variables('formsSqlDatabaseNameTidy'),';User Id=', parameters('formsSqlDatabaseUserName'), ';Password=', parameters('formsSqlDatabasePassword'), ';')]",
                 "EXM Master Connection String": "[concat('Encrypt=True;TrustServerCertificate=False;Data Source=', variables('sqlServerFqdnTidy'), ',1433;Initial Catalog=',variables('exmMasterSqlDatabaseNameTidy'),';User Id=', parameters('exmMasterSqlDatabaseUserName'), ';Password=', parameters('exmMasterSqlDatabasePassword'), ';')]",

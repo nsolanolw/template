@@ -234,26 +234,6 @@
             "minLength": 8,
             "defaultValue": "[concat(toUpper(uniqueString('web', parameters('passwordSalt'))), uniqueString('web', parameters('sqlServerPassword'), parameters('passwordSalt')), toUpper(uniqueString('web', parameters('sitecoreAdminPassword'), parameters('passwordSalt'))), '4@')]"
         },
-        "web2SqlDatabaseUserName": {
-            "type": "string",
-            "minLength": 1,
-            "defaultValue": "webuser"
-        },
-       "web2SqlDatabasePassword": {
-            "type": "securestring",
-            "minLength": 8,
-            "defaultValue": "[concat(toUpper(uniqueString('web', parameters('passwordSalt'))), uniqueString('web', parameters('sqlServerPassword'), parameters('passwordSalt')), toUpper(uniqueString('web', parameters('sitecoreAdminPassword'), parameters('passwordSalt'))), '4@')]"
-        },
-        "web3SqlDatabaseUserName": {
-            "type": "string",
-            "minLength": 1,
-            "defaultValue": "webuser"
-        },
-       "web3SqlDatabasePassword": {
-            "type": "securestring",
-            "minLength": 8,
-            "defaultValue": "[concat(toUpper(uniqueString('web', parameters('passwordSalt'))), uniqueString('web', parameters('sqlServerPassword'), parameters('passwordSalt')), toUpper(uniqueString('web', parameters('sitecoreAdminPassword'), parameters('passwordSalt'))), '4@')]"
-        },
         "formsSqlDatabaseUserName": {
             "type": "string",
             "minLength": 1,
@@ -1253,18 +1233,6 @@
                     "webSqlDatabasePassword": {
                         "value": "[parameters('webSqlDatabasePassword')]"
                     },
-                    "web2SqlDatabaseUserName": {
-                        "value": "[parameters('web2SqlDatabaseUserName')]"
-                    },
-                    "web2SqlDatabasePassword": {
-                        "value": "[parameters('web2SqlDatabasePassword')]"
-                    },
-                    "web3SqlDatabaseUserName": {
-                        "value": "[parameters('web3SqlDatabaseUserName')]"
-                    },
-                    "web3SqlDatabasePassword": {
-                        "value": "[parameters('web3SqlDatabasePassword')]"
-                    },
                     "formsSqlDatabaseUserName": {
                         "value": "[parameters('formsSqlDatabaseUserName')]"
                     },
@@ -1884,18 +1852,6 @@
                     "webSqlDatabasePassword": {
                         "value": "[parameters('webSqlDatabasePassword')]"
                     },
-                    "web2SqlDatabaseUserName": {
-                        "value": "[parameters('web2SqlDatabaseUserName')]"
-                    },
-                    "web2SqlDatabasePassword": {
-                        "value": "[parameters('web2SqlDatabasePassword')]"
-                    },
-                    "web3SqlDatabaseUserName": {
-                        "value": "[parameters('web3SqlDatabaseUserName')]"
-                    },
-                    "web3SqlDatabasePassword": {
-                        "value": "[parameters('web3SqlDatabasePassword')]"
-                    },
                     "formsSqlDatabaseUserName": {
                         "value": "[parameters('formsSqlDatabaseUserName')]"
                     },
@@ -2057,10 +2013,6 @@
                             "masterSqlDatabasePassword": "[parameters('masterSqlDatabasePassword')]",
                             "webSqlDatabaseUserName": "[parameters('webSqlDatabaseUserName')]",
                             "webSqlDatabasePassword": "[parameters('webSqlDatabasePassword')]",
-                            "web2SqlDatabaseUserName": "[parameters('web2SqlDatabaseUserName')]",
-                            "web2SqlDatabasePassword": "[parameters('web2SqlDatabasePassword')]",
-                            "web3SqlDatabaseUserName": "[parameters('web3SqlDatabaseUserName')]",
-                            "web3SqlDatabasePassword": "[parameters('web3SqlDatabasePassword')]",
                             "reportingSqlDatabaseUserName": "[parameters('reportingSqlDatabaseUserName')]",
                             "reportingSqlDatabasePassword": "[parameters('reportingSqlDatabasePassword')]",
                             "poolsSqlDatabaseUserName": "[parameters('poolsSqlDatabaseUserName')]",
