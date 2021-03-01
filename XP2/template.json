@@ -458,7 +458,17 @@
         "cdWebAppName": {
             "type": "string",
             "minLength": 1,
-            "defaultValue": "[concat(parameters('deploymentId'), '-cd')]"
+            "defaultValue": "[concat(parameters('deploymentId'), '-cd-01')]"
+        },
+        "cd2WebAppName": {
+            "type": "string",
+            "minLength": 1,
+            "defaultValue": "[concat(parameters('deploymentId'), '-cd-02')]"
+        },
+        "cd3WebAppName": {
+            "type": "string",
+            "minLength": 1,
+            "defaultValue": "[concat(parameters('deploymentId'), '-preview')]"
         },
         "prcWebAppName": {
             "type": "string",
@@ -848,6 +858,12 @@
                     },
                     "cdWebAppName": {
                         "value": "[parameters('cdWebAppName')]"
+                    },
+                    "cd2WebAppName": {
+                        "value": "[parameters('cd2WebAppName')]"
+                    },
+                    "cd3WebAppName": {
+                        "value": "[parameters('cd3WebAppName')]"
                     },
                     "prcWebAppName": {
                         "value": "[parameters('prcWebAppName')]"
@@ -1270,6 +1286,12 @@
                     },
                     "cdWebAppName": {
                         "value": "[parameters('cdWebAppName')]"
+                    },
+                    "cd2WebAppName": {
+                        "value": "[parameters('cd2WebAppName')]"
+                    },
+                    "cd3WebAppName": {
+                        "value": "[parameters('cd3WebAppName')]"
                     },
                     "prcWebAppName": {
                         "value": "[parameters('prcWebAppName')]"
@@ -2023,6 +2045,8 @@
                             "xcResourceIntensiveHostingPlanName": "[parameters('xcResourceIntensiveHostingPlanName')]",
                             "cmWebAppName": "[parameters('cmWebAppName')]",
                             "cdWebAppName": "[parameters('cdWebAppName')]",
+                            "cd2WebAppName": "[parameters('cd2WebAppName')]",
+                            "cd3WebAppName": "[parameters('cd3WebAppName')]",
                             "prcWebAppName": "[parameters('prcWebAppName')]",
                             "repWebAppName": "[parameters('repWebAppName')]",
                             "xcRefDataWebAppName": "[parameters('xcRefDataWebAppName')]",
